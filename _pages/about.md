@@ -1,6 +1,6 @@
 ---
 layout: page
-title: About
+title: "关于"
 permalink: /about/
 order: 1
 share: false

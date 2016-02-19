@@ -4,7 +4,7 @@
 #url: http://localhost:4000
 #baseurl: /
 url: http://gloriousft.github.io
-baseurl: /
+baseurl: ""
 title: Tianyi's Blog
 description: 记录生活与学习的点滴
 avatar: /assets/img/ogp.png
@@ -52,8 +52,8 @@ disqus:
 #
 str_next: Next
 str_prev: Prev
-str_read_more: Read more...
-str_search: Search
+str_read_more: 阅读更多...
+str_search: 搜索
 str_recent_posts: 最近更新
 str_show_all_posts: 显示所有文章
 
