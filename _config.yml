@@ -97,10 +97,21 @@ ogp:
 
 include: ["_pages"]
 
-markdown: redcarpet
-redcarpet:
-  extensions: ["autolink", "fenced_code_blocks", "strikethrough", "superscript", "with_toc_data", "tables", "footnotes", "no_intra_emphasis"]
 highlighter: pygments
+markdown: kramdown
+kramdown:
+  input:         GFM
+  auto_ids:      true
+  auto_id_prefix: "id-"
+
+#
+#Redcarpet should not be used in github
+#
+
+#markdown: redcarpet
+#redcarpet:
+#  extensions: ["autolink", "fenced_code_blocks", "strikethrough", "superscript", "with_toc_data", "tables", "footnotes", "no_intra_emphasis"]
+#highlighter: pygments
 
 excerpt_separator: <!--more-->
 
