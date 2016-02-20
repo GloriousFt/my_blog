@@ -1,0 +1,15 @@
+---
+layout: page
+title: 分类
+permalink: /categories/
+order: 1
+share: false
+---
+
+<ul class="inline">
+    {% for category in site.categories %}
+    <li class="category">
+        <i class="fa fa-list-alt"></i>
+        <a href="{{ '/search/?c=' | prepend: site.baseurl }}{{ category[0] }}">{{ category[0] }}</a></li>
+    {% endfor %}
+</ul>

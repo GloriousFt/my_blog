@@ -1,8 +1,11 @@
 $(function () {
-    var query = getQuery(["q", "t", "a", "d"]);
+    var query = getQuery(["c", "q", "t", "a", "d"]);
 
     var targets;
     switch (query.key) {
+        case "c":
+            targets = ["categories"];
+            break;
         case "t":
             targets = ["tags"];
             break;
