@@ -45,7 +45,7 @@ permalink: pretty
 # Scripts.
 #
 google_analytics: # e.g. UA-000000-01
-disqus:
+disqus: gloriousft
 
 #
 # Localizations.
