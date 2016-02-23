@@ -43,7 +43,7 @@ select user,host from mysql.user; //查看用户user和host信息
 update mysql.user set password=password('新密码') where User="test" and Host="localhost";
 //修改密码
 update mysql.user set host='%' where User="test";
-//修改host
+//修改host,'%'表示外部主机可以连接,'localhost'表示只能本机连接.
 ```
 
 ### 用户权限设置
