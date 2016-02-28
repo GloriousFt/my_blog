@@ -34,6 +34,8 @@ git commit --amend // 使用上一次提交说明"post",提交所有add内容
 Reset的详细介绍
 [reset](https://git-scm.com/book/zh/v2/Git-%E5%B7%A5%E5%85%B7-%E9%87%8D%E7%BD%AE%E6%8F%AD%E5%AF%86)
 
+<!--more-->
+
 ### git移除提交内容
 ```
 git rm --cached // 移除暂存区域的文件但是保留工作区的文件
