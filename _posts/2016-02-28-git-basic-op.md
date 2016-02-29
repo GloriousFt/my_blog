@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Git最常用的操作
-date: 2016-02-28 18:22:17
+date: 2016-02-28 18:22:17.000000000 +08:00
 type: post
 published: true
 status: publish
@@ -9,6 +9,8 @@ categories:
 - Technology
 tags:
 - git
+meta:
+  _edit_last: '1'
 ---
 
 ### git用户记录
@@ -36,7 +38,7 @@ Reset的详细介绍
 
 <!--more-->
 
-### git移除提交内容
+### git移除文件
 ```
 git rm --cached // 移除暂存区域的文件但是保留工作区的文件
 git rm a.a // 移除a.a这个文件,与add相类似,但是是移除文件
@@ -73,6 +75,7 @@ git push origin :newB // 删除远程newB分支
 git init // 对现有项目进行git初始化
 git clone "repoURL" // 克隆远程仓库到当前文件夹
 ```
+
 **还有一些如rebase的操作我用的不多,就不在这里记录了.**
 
 
