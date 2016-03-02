@@ -48,7 +48,7 @@ update mysql.user set host='%' where User="test";
 
 ### 用户权限设置
 ```
-grant select,delete,update,create,drop on "basename".* to username@"%" identified by "1234";
+grant select,delete,update,create,drop on basename.* to "username"@"%" identified by "1234"; // 或者all privileges
 //在"basename"数据库中,赋予username以上权利,密码要付在后面.
 ```
 
