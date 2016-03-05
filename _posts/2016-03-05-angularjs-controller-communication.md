@@ -44,7 +44,7 @@ AngularJs里面Controller的通信基本是$emit,$broadcast,$on.
 ```javascript
 //firstCtrl.js
 $scope.to-home = function(){
-  $scope.emit('firstToHome', {
+  $scope.$emit('firstToHome', {
     something : 'value',
   });
 };
@@ -64,7 +64,7 @@ $scope.$on('firstToHome', function(event, data){
 ```javascript
 //secondCtrl.js
 $scope.to-home = function(){
-  $scope.emit('secondToHome', {
+  $scope.$emit('secondToHome', {
     something : 'value',
   });
 };
