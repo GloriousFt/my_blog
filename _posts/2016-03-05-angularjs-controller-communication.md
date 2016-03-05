@@ -61,7 +61,7 @@ $scope.$on('firstToHome', function(event, data){
 需要在homeCtrl里做监听和广播.
 同时,要在secondCtrl里做发射,firstCtrl里面做监听.
 
-```JavaScript
+```javascript
 //secondCtrl.js
 $scope.to-home = function(){
   $scope.emit('secondToHome', {
