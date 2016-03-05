@@ -1,7 +1,7 @@
 ---
 layout: post
 title: AngularJs各Controller之间的通信
-date: 2016-02-28 15:40:27.000000000 +08:00
+date: 2016-03-05 15:40:27.000000000 +08:00
 type: post
 published: true
 status: publish
@@ -14,9 +14,11 @@ meta:
 ---
 ### 在AngularJs的Controller之间传值通信
 AngularJs里面Controller的通信基本是$emit,$broadcast,$on.
+
 > $emit是子控制器向父控制器发通信的方法.
 > $broadcast是父控制器向子控制器发通信的方法.
 > $on是监听方法,用于监听通信.
+
 ```
 <div class="home" ng-controller="homeCtrl">
   <div class="firstChild" ng-controller="firstCtrl">
@@ -27,6 +29,8 @@ AngularJs里面Controller的通信基本是$emit,$broadcast,$on.
   </div>
 </div>
 ```
+
+<!--more-->
 
 假设有一段html如上,所以控制器作用域的关系为:
 
@@ -80,5 +84,5 @@ $scope.$on('homeToFirst', function(event, data){
   $scope.final_data = data.something;
 });
 
-//这样,就把secondCtrl的'value'传给了firstCtrl的final_data.
 ```
+这样,就把secondCtrl的'value'传给了firstCtrl的final_data.

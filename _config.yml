@@ -100,6 +100,13 @@ include: ["_pages"]
 markdown: kramdown
 kramdown:
   input:         GFM
+  extensions:
+    - autolink
+    - footnotes
+    - smart
+  use_coderay:   true
+  coderay:
+    coderay_line_numbers:  nil
   auto_ids:      true
   auto_id_prefix: "id-"
   syntax_highlighter: rouge
