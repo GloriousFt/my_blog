@@ -19,7 +19,7 @@ AngularJs里面Controller的通信基本是$emit,$broadcast,$on.
 > $broadcast是父控制器向子控制器发通信的方法.
 > $on是监听方法,用于监听通信.
 
-```
+```html
 <div class="home" ng-controller="homeCtrl">
   <div class="firstChild" ng-controller="firstCtrl">
     <button ng-click="to-home()">第一个子控制器</button>
@@ -41,7 +41,7 @@ AngularJs里面Controller的通信基本是$emit,$broadcast,$on.
 如果第一个控制器想给homeCtrl传值,需要在homeCtrl里做监听,也就是$scope.$on.
 同时,要在firstCtrl里做发射,也就是$emit.
 
-```
+```javascripts
 //firstCtrl.js
 $scope.to-home = function(){
   $scope.emit('firstToHome', {
@@ -61,7 +61,7 @@ $scope.$on('firstToHome', function(event, data){
 需要在homeCtrl里做监听和广播.
 同时,要在secondCtrl里做发射,firstCtrl里面做监听.
 
-```
+```javascripts
 //secondCtrl.js
 $scope.to-home = function(){
   $scope.emit('secondToHome', {
