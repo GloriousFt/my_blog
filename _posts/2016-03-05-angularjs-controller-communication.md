@@ -14,9 +14,11 @@ meta:
 ---
 ### 在AngularJs的Controller之间传值通信
 AngularJs里面Controller的通信基本是$emit,$broadcast,$on.
-> * $emit是子控制器向父控制器发通信的方法.
-> * $broadcast是父控制器向子控制器发通信的方法.
-> * $on是监听方法,用于监听通信.
+
+>  $emit是子控制器向父控制器发通信的方法.
+>  $broadcast是父控制器向子控制器发通信的方法.
+>  $on是监听方法,用于监听通信.
+
 ```html
 <div class="home" ng-controller="homeCtrl">
   <div class="firstChild" ng-controller="firstCtrl">
