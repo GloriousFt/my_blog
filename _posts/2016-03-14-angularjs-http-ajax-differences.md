@@ -37,10 +37,11 @@ app.config( ['$httpProvider', function($httpProvider){
     $httpProvider.defaults.headers.post['Accept'] = 'application/json, text/javascript, */*; q=0.01';
 }] );
 ```
+<!--more-->
 
 这个其实只改content-type就好,其它只是把request的header改成跟jqeury的ajax服务一样.
 
-**在Yii2.0中,csrf防护是自动开启的,所以要是没有传token给接口的话,那么要在config.php里配置一下components**
+**在Yii2.0中,csrf防护是自动开启的,所以要是不想传token给全部接口的话,那么要在config.php里配置一下components**
 
 ```php
 'request' => [
@@ -57,6 +58,7 @@ app.config( ['$httpProvider', function($httpProvider){
             ],
         ],
 ```
+当然也可以在某个controller里单独设置csrf的关闭,不过就不在这篇讲了.
 
 parsers是让Yii2.0的接口能够自动加上对请求的判断,就不用加上开发者自己写的request判断了,也就是说angularjs不用再单独配置$http服务了,Yii2.0帮开发者做好了.
 
@@ -87,5 +89,5 @@ response对象拥有以下属性.
 
 $http还有几个快捷方法,其实就是封装了一些固定配置的方法,比如$http.post(),就是上述完整调用中method为POST的方法.
 
-有关具体的$http方法,可以见[AngularJs的$http官方文档](https://docs.angularjs.org/api/ng/service/$http#head).
+有关更多的$http方法,可以见[AngularJs的$http官方文档](https://docs.angularjs.org/api/ng/service/$http#head).
 
