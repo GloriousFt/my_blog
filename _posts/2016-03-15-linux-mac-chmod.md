@@ -13,7 +13,7 @@ meta:
   _edit_last: '1'
 ---
 经常用chmod来更改文件权限,有时会忘记部分权限累加的含义,这里记录一下数字模式
-```
+```bash
 chmod 400 file - Read by owner
 chmod 040 file - Read by group
 chmod 004 file - Read by world
