@@ -18,6 +18,7 @@ meta:
 言归正传,在分词之后就要特征表达和提取了,什么意思呢?分类器要对文章分类,可是分类器怎么识别每一篇文章呢,它又怎么来对每一篇文章进行数据化的处理呢?
 
 对文章分类有这么几种方法:
+
 * 基于词的匹配
 * 基于知识规则
 * 基于统计的方法(机器学习)
@@ -40,12 +41,12 @@ VSM是怎样具体表达一篇文章的呢?这里我们举例"我爱天安门,�
 带上权值表示,那么就是:
 > D=("我", 2, "爱", 1, "天安门",......)
 在Weka中,每篇文章都要表示为
-```java
+
 @attribute @@class@@ auto
 @attribute 我 numeric
 @attribute 爱 numeric
 {0 auto, 1 2,2 1}
-```
+
 这样的形式,其中auto为类别名."{}"的意义就是,它是auto类别,第一个词"我"出现2次,第二个词"爱"出现1次.
 
 这样就把每一篇文章表达成了计算机可保存的形式.Weka中,这样的一篇文章就是一个Instance,全部文章所形成的数据词典就是Instances.
@@ -177,32 +178,32 @@ evaluation函数是将评测结果存到"evaluation/NaiveBayes.txt"这个文件�
 private void evaluation(String filename, Classifier classifier, Instances data,
 			long trainingStartTime, long trainingEndTime) {
 
-		try {
-			Evaluation eval = new Evaluation(data);
-			eval.crossValidateModel(classifier, data, 3, new Random(1));
-		    String class_detail = eval.toClassDetailsString();
-//			System.out.println(class_detail);
-			String summary = eval.toSummaryString();
-//		    System.out.println(summary);
-		    String confusion_matrix = eval.toMatrixString();
-//		    System.out.println(confusion_matrix);
-		    long endTime = System.currentTimeMillis();
-		    if (!filename.equals("")) {
-		    	FileWriter fw = new FileWriter(filename);
-		    	BufferedWriter bw = new BufferedWriter(fw);
-		    	String result = classifier + "\n" + class_detail + "\n"
-		    			+ summary + "\n" + confusion_matrix + "\n"
-		    			+ "Training Time:\n" + (long)(trainingEndTime - trainingStartTime)/1000.0 + "s\n"
-		    			+ "Testing Time:\n" + (long)(endTime - trainingEndTime)/1000.0 + "s";
-		    	bw.write(result);
-		    	bw.close();
-		    	fw.close();
-		    }
+	try {
+  		Evaluation eval = new Evaluation(data);
+  		eval.crossValidateModel(classifier, data, 3, new Random(1));
+		String class_detail = eval.toClassDetailsString();
+//	    System.out.println(class_detail);
+	  	String summary = eval.toSummaryString();
+//	    System.out.println(summary);
+		String confusion_matrix = eval.toMatrixString();
+//	    System.out.println(confusion_matrix);
+		long endTime = System.currentTimeMillis();
+	    if (!filename.equals("")) {
+	    	FileWriter fw = new FileWriter(filename);
+	    	BufferedWriter bw = new BufferedWriter(fw);
+		  	String result = classifier + "\n" + class_detail + "\n"
+		  			+ summary + "\n" + confusion_matrix + "\n"
+	      			+ "Training Time:\n" + (long)(trainingEndTime - trainingStartTime)/1000.0 + "s\n"
+  	    			+ "Testing Time:\n" + (long)(endTime - trainingEndTime)/1000.0 + "s";
+  	    	bw.write(result);
+		  	bw.close();
+		  	fw.close();
+	      }
 
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	} catch (Exception e) {
+  		// TODO Auto-generated catch block
+  		e.printStackTrace();
+	}
 }
 // evaluate the classifier by confusion matrix
 ```
