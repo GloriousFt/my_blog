@@ -66,36 +66,35 @@ Instances testingSet;
 ```java
 private void initInstance(String segmentedDataPath) {
 		TextDirectoryLoader loader = new TextDirectoryLoader();
-		try {
-			loader.setDirectory(new File(segmentedDataPath));
-			dataRaw = loader.getDataSet();
-//			System.out.println("\nImported data:\n" + dataRaw);
+	try {
+  		loader.setDirectory(new File(segmentedDataPath));
+		dataRaw = loader.getDataSet();
+//		System.out.println("\nImported data:\n" + dataRaw);
 
-			convertToARFF("segmentedArticlesRaw.arff", dataRaw);
+		convertToARFF("segmentedArticlesRaw.arff", dataRaw);
 
-			if (dataRaw.classIndex() == -1) {
-				dataRaw.setClassIndex(dataRaw.numAttributes() - 1);
-			}
+		if (dataRaw.classIndex() == -1) {
+  			dataRaw.setClassIndex(dataRaw.numAttributes() - 1);
+  		}
 
-			vectorDataRaw = stringToVector(dataRaw);
-			convertToARFF("vectorArticleRaw.arff", vectorDataRaw);
-			vectorDataRaw.setClassIndex(0);
+  		vectorDataRaw = stringToVector(dataRaw);
+  		convertToARFF("vectorArticleRaw.arff", vectorDataRaw);
+  		vectorDataRaw.setClassIndex(0);
+  		System.out.println('Dimensions:' + vectorDataRaw.numAttributes());
 
-			System.out.println('Dimensions:' + vectorDataRaw.numAttributes());
+  		divideTrainSetAndTestSet(2, 1);
 
-			divideTrainSetAndTestSet(2, 1);
+  		naiveBayesFunction(trainingSet, testingSet);
+  		// use Naive Bayes classifier
 
-  			naiveBayesFunction(trainingSet, testingSet);
-  			// use Naive Bayes classifier
+  		SMOFunction(trainingSet, testingSet);
+        // use sequential minimal optimization
 
-  			SMOFunction(trainingSet, testingSet);
-            // use sequential minimal optimization
-
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+  	} catch (IOException e) {
+  	    // TODO Auto-generated catch block
+  	    e.printStackTrace();
 	}
+}
 ```
 其中TextDirectoryLoader就是一个txt转Weka需要的arff文件的方法.给它传一个目录就可以.然后再把获取的数据集设置类别.
 
