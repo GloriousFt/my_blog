@@ -5,8 +5,8 @@
 #baseurl: /
 #url: http://gloriousft.github.io
 baseurl: ""
-title: Tianyi's Blog
-description: 记录生活与学习的点滴-To Be a Full Stack Developer
+title: Blog's Name
+description: Say Something
 avatar: /assets/img/ogp.png
 # language: ja
 language: zh-CN
@@ -17,10 +17,10 @@ language: zh-CN
 icons:
   rss: true
   email:
-  github: gloriousft
+  github: qckanemoto
   bitbucket:
-  twitter:
-  facebook: tianyi.li.18
+  twitter: qckanemoto
+  facebook:
   google_plus:
   tumblr:
   behance:
@@ -31,7 +31,7 @@ icons:
   pinterest:
   reddit:
   soundcloud:
-  stack_exchange:  http://stackexchange.com/users/4458189/jason-lee
+  stack_exchange:
   steam:
   wordpress:
   youtube:
@@ -45,7 +45,7 @@ permalink: pretty
 # Scripts.
 #
 google_analytics: # e.g. UA-000000-01
-disqus: gloriousft
+disqus: #your disqus account
 
 #
 # Localizations.
