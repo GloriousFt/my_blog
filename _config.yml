@@ -44,7 +44,8 @@ permalink: pretty
 #
 # Scripts.
 #
-google_analytics: # e.g. UA-000000-01
+google_analytics: UA-75982423-1
+# e.g. UA-000000-01
 disqus: gloriousft
 
 #
