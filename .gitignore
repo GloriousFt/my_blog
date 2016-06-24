@@ -6,4 +6,4 @@ Gemfile.lock
 vendor/
 
 #phpstorm working directory
-/.idea/*
+.idea/
