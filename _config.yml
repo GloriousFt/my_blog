@@ -47,6 +47,7 @@ permalink: pretty
 google_analytics: UA-75982423-1
 # e.g. UA-000000-01
 disqus: gloriousft
+baidu_verification: true
 
 #
 # Localizations.
