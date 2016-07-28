@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Javascript对剪贴板的操作(safari和chrome)"
+title: "Javascript对剪贴板的操作"
 date: 2016-07-28 15:09:59.000000000 +08:00
 type: post
 published: true
