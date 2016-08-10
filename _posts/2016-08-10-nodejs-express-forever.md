@@ -16,7 +16,7 @@ meta:
 ## 1.安装配置环境
 
 ### 1.1 node.js
-首先,安装nodejs,直接下载安装就好,无需配置.[Nodejs下载](https://nodejs.org/en/).
+首先,安装nodejs,直接下载安装就好,无需配置 [Nodejs下载](https://nodejs.org/en/).
 
 nodejs安装好之后,npm也就安装好了(Node.js在0.6.3版本之后内建npm).
 
@@ -26,7 +26,8 @@ npm就是node package manager,就是一个node的套件管理.
 express是node.js的一个web应用程序框架,提供了很多强大的API来构建一个web应用.
 
 安装express,在项目目录下执行
-```bash
+
+```javascript
 npm install express
 ```
 
@@ -37,21 +38,25 @@ npm install express
 forever是用来维持一个node脚本持续运行的.如果只是用node来执行一个xxx.js,那么当远程ssh失去连接的时候,这个脚本就会停止,forever就是让这个脚本连续保持运行以实现服务器功能的.
 
 安装它
-```bash
+
+```javascript
 npm install forever
 ```
 
 启动它
-```bash
+
+```javascript
 forever start xxx.js
 ```
 
 其中xxx.js就是服务器端程序.如果想关闭forever,运行
-```bash
+
+```javascript
 forever stop xxx.js
 ```
 更多的命令可以查看
-```bash
+
+```javascript
 forever --help
 ```
 
@@ -59,12 +64,14 @@ forever --help
 如果是做一个网站需要80端口的,那么可以安装一下nginx,将80端口映射到自己定义的一个端口,这个端口就是node.js里监听的端口.
 
 mac下用homebrew安装nginx
-```bash
+
+```javascript
 brew install nginx
 ```
 
 然后修改配置,在location项下面加
-```bash
+
+```javascript
 proxy_pass http://localhost:8081;
 ```
 
@@ -101,7 +108,7 @@ app同时要监听一个端口,这里定为8081,所以要是网站应用默认�
 
 例如,我们要访问的url为
 
-localhost:8081/helloworld?id=2&name=lili
+"http://localhost:8081/helloworld?id=2&name=lili"
 
 ```javascirpt
 app.get('/helloworld', function (req, res) {
