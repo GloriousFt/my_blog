@@ -10,17 +10,21 @@ $code-font-size: 0.85em;
 $margin: 50px;
 
 // brand color.
-$brand-color: #00cc33;
+//$brand-color: #00cc33;
+$brand-color: #333333;
 
 // other major colors.
 //$site-title-color: rgba(#000, .6);
 $site-title-color: white;
 $page-title-color: $brand-color;
+//$page-title-color: white;
 $background-color: #fff;
 $border-color: rgba(#000, .1);
 
 // typography colors.
 $text-color: #383838;
 //$link-color: darken($brand-color, 40%);
-$link-color: #006633;
+//$link-color: #006633;
+$link-color: #006699;
+
 $blockquote-color: #777;
