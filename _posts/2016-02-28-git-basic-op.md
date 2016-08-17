@@ -65,6 +65,7 @@ git merge master // 合并master分支到当前分支
 git branch -d newB //删除本地newB分支
 git branch --merged // 查看哪些分支已被并入当前分支
 git branch -v // 查看每个分支最后一次提交信息
+git branch -a // 查看远程所有分支
 git push origin newB // 推送本地分支newB到仓库
 git push origin :newB // 删除远程newB分支
 ```
