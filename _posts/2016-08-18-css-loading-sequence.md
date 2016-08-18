@@ -57,7 +57,7 @@ meta:
 
 所以得出结论:
 
-#### 标签style属性样式定义 > head中<style>定义 > 外部样式定义
+#### 标签style属性样式定义 > head中style定义 > 外部样式定义
 
 ## 2.相同属性style,且相同class的定义
 
@@ -119,7 +119,7 @@ p {
 
 #### id选择器优先级 > class选择器优先级 > tag选择器优先级
 
-#### 当然用!important可以直接强制css定义优先级最高,但是极不推荐.
+#### 当然用!important可以直接强制css定义优先级最高,但是<style="color:red">极不推荐.
 
 理由如下:
 
