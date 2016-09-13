@@ -45,6 +45,7 @@ permalink: pretty
 # Scripts.
 #
 google_analytics: UA-75982423-1
+baidu_analytics: 53Vz033ZnI
 # e.g. UA-000000-01
 disqus: gloriousft
 baidu_verification: true
