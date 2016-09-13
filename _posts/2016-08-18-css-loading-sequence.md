@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "浏览器对页面渲染时CSS优先级顺序"
+title: "浏览器对页面渲染时CSS优先级顺序(浅析)"
 date: 2016-08-18 17:45:59.000000000 +08:00
 type: post
 published: true
@@ -13,6 +13,10 @@ tags:
 meta:
   _edit_last: '1'
 ---
+
+本文只是CSS样式优先级的浅析,只是用于资料查询的话本文刚好合适.
+
+如果想要更多关于CSS优先级的内容,请看[浏览器对CSS的样式权重Specificity计算](http://litianyi.cc/technology/2016/09/13/css-specificity-calculation/).
 
 ## 1.不同属性style的定义
 
@@ -57,11 +61,11 @@ meta:
 
 所以得出结论:
 
-**标签style属性样式定义 > head中style定义 > 外部样式定义**
+**行内样式定义 > 内部样式定义 > 外部样式定义**
 
 <!--more-->
 
-## 2.相同属性style,且相同class的定义
+## 2.相同属性style,且相同类选择器
 
 当我们在一个文件中定义了一个属性多次,那么优先级是什么样呢?
 
@@ -85,7 +89,7 @@ meta:
 
 **在同一位置css中定义的样式,定义在后面的样式优先级 > 定义在前面的样式优先级**
 
-## 3.相同属性style,且不同class的定义
+## 3.相同属性style,但不同选择器
 
 假如我们定义了一个css为
 
@@ -120,6 +124,10 @@ p {
 所以得出结论:
 
 **id选择器优先级 > class选择器优先级 > tag选择器优先级**
+
+其实这里涉及到浏览器选择器样式匹配优先级的问题(specificity计算).
+
+可看[浏览器对CSS的样式权重Specificity计算](http://litianyi.cc/technology/2016/09/13/css-specificity-calculation/)了解详情.
 
 **当然用!important可以直接强制css定义优先级最高,但是极不推荐**.
 
