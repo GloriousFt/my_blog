@@ -14,6 +14,8 @@ meta:
   _edit_last: '1'
 ---
 
+以下是博主自己总结的一些问题:
+
 ## 1. HTTP与HTTPS的区别
 
 * HTTP是超文本传输协议,信息是明文传输,HTTPS则是具有安全性的SSL加密传输协议.
@@ -35,5 +37,28 @@ Javscript是一种原型语言,类的概念在javascript中是过时的.虽然�
 ## 4. Javascript函数方法call和apply区别
 
 它们都是调用一个对象的一个方法,但参数不同,call是传指定参数,而apply是传参数数组.
+
+## 5. CSS3一些新特性
+
+边框border,阴影box-shadow,动画rotate,盒模型box,文字效果word-wrap,透明度opacity等.
+
+## 6. Ajax原理
+
+异步js与xml,不需要重载html,只对某部分进行异步更新.
+```javascript
+var xmlhttp = new XMLHttpRequest();
+xmlhttp.open(method, url, true);
+xmlhttp.send();
+```
+
+## 7. 一些前端优化方法
+
+* 减少HTTP请求数,合理设置HTTP缓存.
+* 样式引用放到<head>中
+* 减少DOM操作数量
+* 减少DOM节点数量
+* 避免重复请求资源
+* 使用<link>代替@import,否则相当于将css置底
+* 资源压缩
 
 ## 2.TO BE CONTINUED
