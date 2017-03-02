@@ -14,7 +14,7 @@ meta:
   _edit_last: '1'
 ---
 
-以下是博主自己总结的一些问题:
+以下是博主自己总结的一些前端知识问题:
 
 ## 1. HTTP与HTTPS的区别
 
@@ -53,12 +53,63 @@ xmlhttp.send();
 
 ## 7. 一些前端优化方法
 
-* 减少HTTP请求数,合理设置HTTP缓存.
-* 样式引用放到<head>中
-* 减少DOM操作数量
+* 减少HTTP请求数,合理设置HTTP缓存
+* 样式引用放到<head>中,先下载好CSS可以先渲染页面
+* 减少DOM访问与操作次数
 * 减少DOM节点数量
+* 尽量使用外部资源CSS,Javscript,可以被浏览器缓存
 * 避免重复请求资源
-* 使用<link>代替@import,否则相当于将css置底
+* 使用<link>代替@import,页面加载时,link的内容也会同时加载进来,但是@import是在页面加载后才把CSS加进来,相当于将css置底
 * 资源压缩
+
+## 8. Javascript基本数据类型
+
+Number, Boolean, String, Array, Object, NULL, Undefined
+
+## 9. 浏览器访问一个网站的过程
+
+* 浏览器先要解析域名,查找浏览器缓存,如果没找到则会查找本地hosts文件.若还没找到则会访问DNS服务器,利用迭代或是递归方式来进行域名IP查找,最终拿到域名对应的IP.
+* 有了IP,浏览器利用HTTP会与IP对应的服务器进行通信,HTTP采用TCP的连接方式,会有"3次握手"建立链接.
+* 建立好链接则可以用HTTP进行数据传输,获得到服务器端监听80端口返回的HTML文件资源.
+* HTML中会有各种各样的资源,浏览器会解析HTML来进行每一种资源的获取.
+* 有些资源是异步获取的,所以浏览器会先进行渲染,展示页面,最终形成一个用户所见的网页.
+
+## 10. Javascript中instanceof和typeof的区别
+
+typeof是用来判断变量类型的,而instanceof是用来判断某变量是不是某对象实例的.
+
+## 11. Session和Cookie的区别
+
+* Cookie是浏览器端的缓存,而Session是服务器端的缓存.
+* Cookie相对来说不安全,可在客户端主机上直接获取得到.
+* Cookie是浏览器端为了区分不同用户数据而形成的,弥补了HTTP的无状态性,而Session是服务器端为了记录不同用户访问状态的服务器端存储.
+
+## 12. HTML常见行内元素
+
+img, input, span, label, select, a, textarea...
+
+## 13. DOCTYPE的含义
+
+DOCTYPE声明了浏览器对该文档解析的方法,`!DOCTYPE HTML`就是声明了浏览器要用W3C的标准解析来渲染页面.
+
+## 14. CSS垂直居中
+
+* 父元素display设置为`table-cell`.
+```css
+.parent {
+    vertical-align: middle;
+    display: table-cell;
+}
+```
+* 若父元素高度固定,则可计算高度,用子元素`margin-top`来实现.
+* 相对定位,`top:50%`.
+
+## 15. HTML5语义化标签
+
+header, footer, aside, section, article, hgroup, nav...
+
+## 16. 浏览器缓存和Cookie的关系
+
+Cookie也是浏览器缓存的一种方式,不过多是用于用户认证的,通常设置数据缓存都是设置HTTP头部的cache-control(设置相对时间)或者expire(设置固定期限).
 
 ## 2.TO BE CONTINUED
