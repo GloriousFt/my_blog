@@ -47,6 +47,7 @@ Javscript是一种原型语言,类的概念在javascript中是过时的.虽然�
 ## 6. Ajax原理
 
 异步js与xml,不需要重载html,只对某部分进行异步更新.
+
 ```javascript
 var xmlhttp = new XMLHttpRequest();
 xmlhttp.open(method, url, true);
@@ -97,12 +98,14 @@ DOCTYPE声明了浏览器对该文档解析的方法,`!DOCTYPE HTML`就是声明
 ## 14. CSS垂直居中
 
 * 父元素display设置为`table-cell`.
+
 ```css
 .parent {
     vertical-align: middle;
     display: table-cell;
 }
 ```
+
 * 若父元素高度固定,则可计算高度,用子元素`margin-top`来实现.
 * 相对定位,`top:50%`.
 
