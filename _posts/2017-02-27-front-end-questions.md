@@ -142,4 +142,36 @@ CSRF攻击,跨站请求伪造. 防御方法,正确使用POST和GET,还可以用�
 
 **注意:上述可见内容高度都算上了padding.**
 
-### 2.TO BE CONTINUED
+### 20. Javascript闭包的意义与作用
+
+闭包的形式就是一个函数定义并返回了一个内部函数,这个内部函数可以操作其内部变量.
+
+作用:最大的作用就是可以用闭包实现一个函数内部变量的私有化.如下例,`private_counter`和`increase`无法直接被调用,闭包起到了私有化的作用.
+
+缺点:容易造成内存极大消耗.
+
+例子:
+
+```javascript
+var Counter = function() {
+    var private_counter = 0;
+    function increase() {
+        private_counter++;
+    }
+
+    return {
+        plus1 : function() {
+            increase();
+        },
+        value : function() {
+            return private_counter;
+        }
+    }
+};
+
+var counter1 = new Counter();
+counter1.plus1();
+counter1.value();
+```
+
+### TO BE CONTINUED
