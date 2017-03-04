@@ -13,7 +13,6 @@ tags:
 meta:
   _edit_last: '1'
 ---
-
 以下是博主自己总结的一些前端知识问题:
 
 ## 1. HTTP与HTTPS的区别
@@ -48,11 +47,12 @@ Javscript是一种原型语言,类的概念在javascript中是过时的.虽然�
 
 异步js与xml,不需要重载html,只对某部分进行异步更新.
 
-```javascript
+{% highlight javascript %}
 var xmlhttp = new XMLHttpRequest();
 xmlhttp.open(method, url, true);
 xmlhttp.send();
 ```
+{% endhightlight %}
 
 ## 7. 一些前端优化方法
 
