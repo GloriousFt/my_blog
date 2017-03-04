@@ -38,6 +38,8 @@ Javscript是一种原型语言,类的概念在javascript中是过时的.虽然�
 
 它们都是调用一个对象的一个方法,但参数不同,call是传指定参数,而apply是传参数数组.
 
+<!--more-->
+
 ## 5. CSS3一些新特性
 
 边框border,阴影box-shadow,动画rotate,盒模型box,文字效果word-wrap,透明度opacity等.
@@ -111,5 +113,31 @@ header, footer, aside, section, article, hgroup, nav...
 ## 16. 浏览器缓存和Cookie的关系
 
 Cookie也是浏览器缓存的一种方式,不过多是用于用户认证的,通常设置数据缓存都是设置HTTP头部的cache-control(设置相对时间)或者expire(设置固定期限).
+
+## 17. 前端跨域访问方法及跨域问题
+
+* JSONP,JQuery中AJAX请求可以用JSONP格式数据,同时要修改服务器端.
+* 转到后台去请求,安全.
+* window.postMessage(data,'url'); //url为另一站点
+
+XSS攻击,恶意js代码注入. 防御方法:转义<script>,或后台进行转义防范.
+
+CSRF攻击,跨站请求伪造. 防御方法,正确使用POST和GET,还可以用验证码的方式拒绝其它站点的伪造请求.
+
+## 18. Javascript中的原型链
+
+原型链类似于继承关系.
+
+只有构造函数才有prototype,对象没有.
+
+每个对象都有__proto__来记录自己的原型链,__proto__就是指向父的原型prototype.
+
+## 19. Javascript中offsetHeight,clientHeight和scrollHeight的区别
+
+* scrollHeight为整个页面内容的高度,当有滚动条时,它的值为当前可见窗口高度+滚动上去的高度+下面未滚动到的高度.
+* clientHeight为当前可见区域内容的高度.
+* offsetHeight为当前可见区域内容高度+边框+滚动条的高度.
+
+**注意:上述可见内容高度都算上了padding.**
 
 ## 2.TO BE CONTINUED
