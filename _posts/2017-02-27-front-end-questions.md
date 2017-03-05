@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "前端方向的一些零散面试小问题"
+title: "前端方向的一些零散小问题"
 date: 2017-02-27 14:34:59.000000000 +08:00
 type: post
 published: true
@@ -55,6 +55,7 @@ xmlhttp.send();
 
 ### 7. 一些前端优化方法
 
+* 使用cdn，减小服务器负担
 * 减少HTTP请求数,合理设置HTTP缓存
 * 样式引用放到<head>中,先下载好CSS可以先渲染页面
 * 减少DOM访问与操作次数
@@ -116,15 +117,13 @@ header, footer, aside, section, article, hgroup, nav...
 
 Cookie也是浏览器缓存的一种方式,不过多是用于用户认证的,通常设置数据缓存都是设置HTTP头部的cache-control(设置相对时间)或者expire(设置固定期限).
 
-### 17. 前端跨域访问方法及跨域问题
+### 17. 前端跨域访问方法
 
 * JSONP,JQuery中AJAX请求可以用JSONP格式数据,同时要修改服务器端.
-* 转到后台去请求,安全.
+* 代理服务器的方法,也就是将请求转到后台去,安全.
+* HTML5中webSocket的方法.
+* iframe的方法.
 * window.postMessage(data,'url'); //url为另一站点
-
-XSS攻击,恶意js代码注入. 防御方法:转义script,或后台进行转义防范.
-
-CSRF攻击,跨站请求伪造. 防御方法,正确使用POST和GET,还可以用验证码的方式拒绝其它站点的伪造请求.
 
 ### 18. Javascript中的原型链
 
@@ -190,5 +189,49 @@ counter1.value();
 '1' === 1; //false
 '1' === '1'; //true
 ```
+
+### 23. HTML5新特性
+
+* 多媒体标签,可以不再依赖flash.
+* 一些新增API,如classList.
+* 语义化标签,如aside,nav,header,footer等.
+* webSocket,可以让客户端与服务器建立全双工通信.
+
+### 24. 浏览器渲染过程
+
+* 获取到HTML,构建DOM树.
+* 根据head中CSS构建render树.
+* 构建布局树,包含元素位置信息.
+
+渲染与资源获取的过程是并行的.
+
+### 25. 浏览器的repaint(重绘)与reflow(回流)
+
+repaint指元素样式发生变化,但是位置,大小等信息没变,则只需要repaint这一区域的该元素即可.
+
+reflow指的是位置或大小等影响布局的信息变化了,则需要将影响到的所有元素reflow.
+
+### 26. 同源的概念
+
+js不能访问直接非同源的资源,同源是指域名,协议,端口都相同.
+
+### 27. javascript事件委托
+
+事件委托指的是不直接在元素上绑定监听事件,而是在其父元素上绑定,这样可以在一些情况下提高效率.
+
+如:
+```html
+<ul>
+    <li>...</li>
+    ...
+</ul>
+```
+绑定在ul上性能更好,减少事件绑定的元素.
+
+### 28. Web安全问题
+
+XSS攻击,跨站脚本攻击,恶意js代码注入. 防御方法:转义script,或后台进行转义防范.
+
+CSRF攻击,跨站请求伪造. 防御方法,正确使用POST和GET,还可以用验证码的方式拒绝其它站点的伪造请求.
 
 ### TO BE CONTINUED
