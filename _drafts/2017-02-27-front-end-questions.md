@@ -266,5 +266,30 @@ XHTML其实就是HTML4.01,但是更为严格,以XML的标准,要求标签必须�
 Content-Type是用来规定数据类型的,可以是`application/x-www-form-urlencoded`,那携带的数据就为Form Data方式发送的.
 如果是`text/plain;charset=UTF-8`,那么携带的数据就是以requestPayload的方式发送的.
 
+### 33. Javascript中的继承
+
+```javascript
+function Animal(name) {
+  this.name = name;
+}
+
+Animal.prototype.bark = function(sound) {
+  console.log(sound);
+}
+
+function extend(Child, Parent) {
+  Child.prototype = Object.create(Parent.prototype);
+  Child.prototype.contructor = Child;
+}
+
+function Duck(name, age) {
+  this.age = age;
+}
+
+extend(Duck, Animal);
+
+var duck1 = new Duck('Donald', 2);
+duck1.bark();
+```
 
 ### TO BE CONTINUED

@@ -38,8 +38,8 @@
       <file leaf-file-name="2017-02-27-front-end-questions.md" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/_posts/2017-02-27-front-end-questions.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-8.440298">
-              <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.47761193">
+              <caret line="280" column="52" selection-start-line="280" selection-start-column="52" selection-end-line="280" selection-end-column="52" />
               <folding />
             </state>
           </provider>
@@ -204,8 +204,8 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="148" />
-    <option name="y" value="89" />
+    <option name="x" value="60" />
+    <option name="y" value="120" />
     <option name="width" value="1400" />
     <option name="height" value="773" />
   </component>
@@ -523,7 +523,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="148" y="89" width="1400" height="773" extended-state="0" />
+    <frame x="60" y="120" width="1400" height="773" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.34536082" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -933,8 +933,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/_posts/2017-02-27-front-end-questions.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.440298">
-          <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.47761193">
+          <caret line="280" column="52" selection-start-line="280" selection-start-column="52" selection-end-line="280" selection-end-column="52" />
           <folding />
         </state>
       </provider>
