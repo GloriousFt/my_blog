@@ -93,7 +93,8 @@ img, input, span, label, select, a, textarea...
 
 ### 13. DOCTYPE的含义
 
-DOCTYPE声明了浏览器对该文档解析的方法,`!DOCTYPE HTML`就是声明了浏览器要用W3C的标准解析来渲染页面.
+DOCTYPE声明了文档类型.HTML5只有一种文档类型,HTML4.01有三种.
+`!DOCTYPE HTML`就是声明了浏览器要用HTML5的标准解析来渲染页面.
 
 ### 14. CSS垂直居中
 
@@ -152,7 +153,7 @@ Cookie也是浏览器缓存的一种方式,不过多是用于用户认证的,通
 例子:
 
 ```javascript
-var Counter = function() {
+var Counter = (function() {
     var private_counter = 0;
     function increase() {
         private_counter++;
@@ -166,7 +167,7 @@ var Counter = function() {
             return private_counter;
         }
     }
-};
+})();
 
 var counter1 = new Counter();
 counter1.plus1();
@@ -233,5 +234,37 @@ js不能访问直接非同源的资源,同源是指域名,协议,端口都相同
 XSS攻击,跨站脚本攻击,恶意js代码注入. 防御方法:转义script,或后台进行转义防范.
 
 CSRF攻击,跨站请求伪造. 防御方法,正确使用POST和GET,还可以用验证码的方式拒绝其它站点的伪造请求.
+
+### 29. HTML中的img标签有Alt和Title属性,有什么区别
+
+* Alt是当图片资源无法读取时,用Alt属性值进行替代的方法.
+* Title是图片的信息属性,当用户将鼠标放到图片时会显示title属性值.
+
+### 30. XHTML和HTML的不同
+
+XHTML其实就是HTML4.01,但是更为严格,以XML的标准,要求标签必须闭合,有错一定会在浏览器显示出来.
+因为这一点导致极大多数的网页都不会用XHTML标准.
+
+### 31. CSS清除浮动
+
+```css
+.clearfix:before,
+.clearfix:after {
+    content: "";
+    line-height: 0;
+    display: table;
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+```
+
+### 32. HTTP头部的Content-Type是什么意思
+
+Content-Type是用来规定数据类型的,可以是`application/x-www-form-urlencoded`,那携带的数据就为Form Data方式发送的.
+如果是`text/plain;charset=UTF-8`,那么携带的数据就是以requestPayload的方式发送的.
+
 
 ### TO BE CONTINUED
