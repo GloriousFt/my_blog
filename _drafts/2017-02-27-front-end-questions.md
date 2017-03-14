@@ -31,7 +31,7 @@ meta:
 
 ### 3. Javascript与传统面向对象语言有何不同
 
-Javscript是一种原型语言,类的概念在javascript中是过时的.虽然它可以模拟类这种设计方式,包括实现继承,多态等,但是它本身的设计方式是组合方式.
+Javascript是一种原型语言,类的概念在javascript中是过时的.虽然它可以模拟类这种设计方式,包括实现继承,多态等,但是它本身的设计方式是组合方式.
 
 ### 4. Javascript函数方法call和apply区别
 
@@ -55,7 +55,7 @@ xmlhttp.send();
 
 ### 7. 一些前端优化方法
 
-* 使用cdn，减小服务器负担
+* 使用CDN，减小服务器负担
 * 减少HTTP请求数,合理设置HTTP缓存
 * 样式引用放到<head>中,先下载好CSS可以先渲染页面
 * 减少DOM访问与操作次数
@@ -65,9 +65,9 @@ xmlhttp.send();
 * 使用<link>代替@import,页面加载时,link的内容也会同时加载进来,但是@import是在页面加载后才把CSS加进来,相当于将css置底
 * 资源压缩
 
-### 8. Javascript基本数据类型
+### 8. Javascript数据类型
 
-Number, Boolean, String, Array, Object, NULL, Undefined
+Number, Boolean, String, Array, Object, NULL, Undefined...
 
 ### 9. 浏览器访问一个网站的过程
 
@@ -79,7 +79,7 @@ Number, Boolean, String, Array, Object, NULL, Undefined
 
 ### 10. Javascript中instanceof和typeof的区别
 
-typeof是用来判断变量类型的,而instanceof是用来判断某变量是不是某对象实例的.
+typeof是用来返回变量类型的,不区分Array和Object,而instanceof是用来判断某变量是不是某对象实例的.
 
 ### 11. Session和Cookie的区别
 
@@ -120,7 +120,7 @@ Cookie也是浏览器缓存的一种方式,不过多是用于用户认证的,通
 
 ### 17. 前端跨域访问方法
 
-* JSONP,JQuery中AJAX请求可以用JSONP格式数据,同时要修改服务器端.
+* JSONP,JQuery中AJAX请求可以用JSONP,同时要修改服务器端.
 * 代理服务器的方法,也就是将请求转到后台去,安全.
 * HTML5中webSocket的方法.
 * iframe的方法.
@@ -181,7 +181,7 @@ counter1.value();
 
 ### 22. Javascript中"=="与"==="的对比
 
-"=="只要两边值相同就返回true,"==="两边的值不仅要相同,类型也要相同.
+"=="只要两边值相同就返回true,有一个类型转换的过程,"==="两边的值不仅要相同,类型也要相同.
 
 例如:
 
@@ -216,7 +216,7 @@ reflow指的是位置或大小等影响布局的信息变化了,则需要将影�
 
 js不能访问直接非同源的资源,同源是指域名,协议,端口都相同.
 
-### 27. javascript事件委托
+### 27. Javascript事件委托
 
 事件委托指的是不直接在元素上绑定监听事件,而是在其父元素上绑定,这样可以在一些情况下提高效率.
 
@@ -291,5 +291,15 @@ extend(Duck, Animal);
 var duck1 = new Duck('Donald', 2);
 duck1.bark();
 ```
+
+### 34. JQuery中的$(window).load和$(document).ready区别
+
+load是所有内容都加载完后执行,包括图片等资源.
+ready是DOM加载完时执行,此时图片等资源可能没完成加载.
+
+### 35. Javascript中绑定事件的两种方式,事件冒泡和事件捕获
+
+W3C默认是事件冒泡,addEventListener('click',function(){},false);
+第三个参数为true则为事件捕获方式.
 
 ### TO BE CONTINUED
