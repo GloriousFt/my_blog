@@ -83,9 +83,11 @@ typeof是用来返回变量类型的,不区分Array和Object,而instanceof是用
 
 ### 11. Session和Cookie的区别
 
-* Cookie是浏览器端的缓存,而Session是对服务器端而言的.
+* 它们都是记录用户状态的机制,但Cookie是存在浏览器端,而Session是对服务器端而言的.
 * Cookie相对来说不安全,可在客户端主机上直接获取得到.
-* Cookie是浏览器端为了区分不同用户数据而形成的,弥补了HTTP的无状态性,而Session是服务器端为了记录不同用户访问状态的服务器端存储，通常会把sessionid放到cookie里.
+* Session是通常存在服务器端的内存中的.
+* Session没被访问一次都会更新上次访问时间.
+* Session的ID通常需要Cookie存储,或从URL中获取.
 
 ### 12. HTML常见行内元素
 
@@ -234,10 +236,12 @@ js不能访问直接非同源的资源,同源是指域名,协议,端口都相同
 ### 28. Web安全问题
 
 XSS攻击,跨站脚本攻击,恶意js代码注入.
-场景：在网站A注册了一个带有恶意JS代码的用户，恶意代码可能为将document.cookie发送给攻击者网站，服务器将其存到了数据库中。这样当其他用户访问数据库获取到这个恶意代码并在页面上显示的时候，大量用户的cookie信息都会发送给攻击者。
-防御方法:转义script,或后台进行转义防范.服务器端进行HttpOnly设置.
+场景:在网站A注册了一个带有恶意JS代码的用户，恶意代码可能为将document.cookie发送给攻击者网站，服务器将其存到了数据库中。这样当其他用户访问数据库获取到这个恶意代码并在页面上显示的时候，大量用户的cookie信息都会发送给攻击者。
+防御方法:转义script,或后台进行转义防范.服务器端还可以进行HttpOnly设置,使浏览器禁止访问cookie.
 
-CSRF攻击,跨站请求伪造. 防御方法,正确使用POST和GET,还可以用验证码的方式拒绝其它站点的伪造请求.
+CSRF攻击,跨站请求伪造.
+场景:在网站A登录后产生了Cookie,在会话期有效时间内访问网站B,网站B伪造了一个访问A的链接,当用户在B上点击链接后,服务器接收到的请求无法区分A,B站来源,因为都有之前产生的cookie.所以服务器会再次接受请求并执行相应逻辑.
+防御方法:正确使用POST和GET,还可以用验证码的方式拒绝其它站点的伪造请求.或者在提交表单时添加伪随机数,服务器端进行伪随机数校验.
 
 ### 29. HTML中的img标签有Alt和Title属性,有什么区别
 
@@ -318,10 +322,10 @@ W3C默认是事件冒泡,addEventListener('click',function(){},false);
 
 ### 38. CSS属性box-sizing是做什么用的
 
-*`box-sizing:content-box`,规定高度与宽度是盒模型的content高度.
-*`box-sizing:border-box`,规定高度与宽度是盒模型的content与padding和border之和.也是最为常见的.
+*`box-sizing:content-box`,规定高度与宽度是盒模型的content高度,也是CSS3默认的.
+*`box-sizing:border-box`,规定高度与宽度是盒模型的content与padding和border之和.
 
-### 39. CSS3画三角和圆
+### 39. CSS3画三角和圆,椭圆
 
 三角:
 ```css
@@ -333,14 +337,72 @@ W3C默认是事件冒泡,addEventListener('click',function(){},false);
     border-right: 5px solid transparent;
 }
 ```
-圆:
+圆,椭圆:
 ```css
 .circle {
     width: 100px;
     height: 100px;
+    //height: 50px; //椭圆
     border-radium: 50%;
     background-color: #000;
 }
 ```
+
+### 40.HTTP头部中expires和cache-control的作用
+
+只有get请求才会被缓存,post不会.
+
+cache-control中有不同的值,不同值的含义不同:
+* no-cache表示不设置缓存.
+* max-age表示客户端可以接收生存期不大于指定时间（以秒为单位）的响应.
+* Public指响应可被任何缓存区缓存,Private指只能被当前用户缓存.
+
+Expires 表示存在时间,允许客户端在这个时间之前不去检查（发请求）,等同max-age的效果.
+但是如果同时存在,则被Cache-Control的max-age覆盖.
+
+### 41.Cache-control的具体控制功能
+
+* 1.打开新窗口
+private,no-cache和must-revalidate,打开新窗口都会重新访问服务器.
+max-age的话,有效期内不会重新访问.
+* 2.地址栏回车
+private,must-revalidate第一次会重新访问服务器.
+no-cache每次都会重新访问.
+max-age,有效期内不会重新访问.
+* 3.后退
+值为no-cache的话每次都会重新访问服务器.其他值不会.
+* 4.刷新页面
+无论何值,都会重新访问.
+
+### 42.ETag和Last-Modified的作用
+
+用作判断是否需要重新传数据的一个判断标志.
+可以在服务器端进行配置.ETAG是HTTP1.1的,而Last-Modified是HTTP1.0的.
+
+客户端第一次访问服务器时:
+返回的HTTP头部会有ETAG和Last-Modified值.
+客户端第二次访问服务器时:
+请求的HTTP头部会有If-None-Match,值为ETAG值.还有If-Modified-Since,值为Last-Modified值.
+服务器端接收到第二次请求时:
+发现If-None-Match的值跟之前的ETAG值相同,则返回304,告知客户端Not Modified,客户端则可以继续用之前获得到的数据.
+
+ETAG和Last-Modified相比具有更高优先级,后者只能到秒级,因此如在1s内连续访问服务器的话则需要进行ETAG的设置来进行优化.
+另外如果服务器只对某个文件时间进行了修改,后者也会认为是修改了文件,因此还会重传文件,前者则不会.
+
+### 43.Cookie Free优化原理
+Cookie Free就是指将图片,css,js等静态资源从主域名的服务器上分离出来放到子域下的服务器上,通过设置cookie的domain使得请求这些资源时不再发送cookie.
+同时,使用多个域名也可以加大数据请求并发量.
+
+### 44.浏览器几种缓存情况
+Last-Modofied,ETAG,Expires,Cache-Control
+
+Last-Modofied,ETAG仍然需要浏览器访问一次服务器,如果服务器计算的ETAG相同,则返回304,无实体信息.
+
+Expires,Cache-Control则不需要再访问服务器,只需要看有效时间即可.浏览器直接返回200(from cache).
+
+上述的几种在刷新页面的情况下都会重新访问服务器.
+
+### 45.HTTP2.0相比于HTTP1.1的重大改进
+
 
 ### TO BE CONTINUED

@@ -117,6 +117,7 @@ header, footer, aside, section, article, hgroup, nav...
 ### 16. 浏览器缓存和Cookie的关系
 
 Cookie也是浏览器缓存的一种方式,不过多是用于用户认证的,通常设置数据缓存都是设置HTTP头部的cache-control(设置相对时间)或者expire(设置固定期限).
+LocaleStorage,SessionStorage的数据容量都比较大,cookie只有4kb,相对较小.
 
 ### 17. 前端跨域访问方法
 
@@ -231,7 +232,7 @@ js不能访问直接非同源的资源,同源是指域名,协议,端口都相同
 
 ### 28. Web安全问题
 
-XSS攻击,跨站脚本攻击,恶意js代码注入. 防御方法:转义script,或后台进行转义防范.
+XSS攻击,跨站脚本攻击,恶意js代码注入. 防御方法:转义script,或后台进行转义防范.服务器端进行HttpOnly设置.
 
 CSRF攻击,跨站请求伪造. 防御方法,正确使用POST和GET,还可以用验证码的方式拒绝其它站点的伪造请求.
 
@@ -301,5 +302,42 @@ ready是DOM加载完时执行,此时图片等资源可能没完成加载.
 
 W3C默认是事件冒泡,addEventListener('click',function(){},false);
 第三个参数为true则为事件捕获方式.
+
+### 36. 多个页面间如何通信
+
+通过Cookie,localeStorage,SessionStorage
+
+### 37. Javascript中New关键字的实际过程
+
+* 创建一个新的空变量,然后this指向它.
+* 原型继承,空变量的__proto__指向New后面函数的prototype.
+* 改变this指向,XX.call(空变量这个对象).
+
+### 38. CSS属性box-sizing是做什么用的
+
+*`box-sizing:content-box`,规定高度与宽度是盒模型的content高度.
+*`box-sizing:border-box`,规定高度与宽度是盒模型的content与padding和border之和.也是最为常见的.
+
+### 39. CSS3画三角和圆
+
+三角:
+```css
+.triangle {
+    width: 0;
+    height: 0,
+    border-bottom: 5px solid #fff;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+}
+```
+圆:
+```css
+.circle {
+    width: 100px;
+    height: 100px;
+    border-radium: 50%;
+    background-color: #000;
+}
+```
 
 ### TO BE CONTINUED
