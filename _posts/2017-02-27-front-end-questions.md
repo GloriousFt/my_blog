@@ -51,6 +51,10 @@ Javascript是一种原型语言,类的概念在javascript中是过时的.虽然�
 var xmlhttp = new XMLHttpRequest();
 xmlhttp.open(method, url, true);
 xmlhttp.send();
+xmlHttp.onreadystatechange = function(){
+    if(xmlHttp.readyState === 4 & xmlHttp.status === 200){
+    }
+}
 ```
 
 ### 7. 一些前端优化方法
@@ -117,13 +121,13 @@ DOCTYPE声明了文档类型.HTML5只有一种文档类型,HTML4.01有三种.
 header, footer, aside, section, article, hgroup, nav...
 
 ### 16. 浏览器缓存和Cookie的关系
-
-Cookie也是浏览器缓存的一种方式,不过多是用于用户认证的,通常设置数据缓存都是设置HTTP头部的cache-control(设置相对时间)或者expire(设置固定期限).
-LocaleStorage,SessionStorage的数据容量都比较大,cookie只有4kb,相对较小.
+* Cookie也是浏览器缓存的一种方式,不过多是用于用户认证的,通常设置数据缓存有效期都是设置HTTP头部的cache-control(设置相对时间)或者expire(设置固定期限).
+* LocalStorage,SessionStorage是专用做存储的，它们的的数据容量都比较大,cookie只有4kb,相对较小.
+* Web Storage拥有自己的设置和获取数据方法如setItem，getItem，removeItem，clear等，但是cookie就没有，完全需要js实现相应方法。
 
 ### 17. 前端跨域访问方法
 
-* JSONP,JQuery中AJAX请求可以用JSONP（JSON+PADDING）。
+* JSONP,JQuery中AJAX请求可以用JSONP（JSON+PADDING）。只支持GET。
   JSONP原理是站中生成一个script标签，src为地址，同时向服务器提供一个回调（可以写到URL中或是约定好），服务器用这个回调的名字作为函数包住JSON数据做返回，回调的参数就是返回的对象数据。然后js在回调中做后续处理。
 * 代理服务器的方法,也就是将请求转到后台去,安全.
 * HTML5中webSocket的方法.
@@ -402,7 +406,51 @@ Expires,Cache-Control则不需要再访问服务器,只需要看有效时间即�
 
 上述的几种在刷新页面的情况下都会重新访问服务器.
 
-### 45.HTTP2.0相比于HTTP1.1的重大改进
+### 45.HTTP/2.0相比于HTTP/1.1的重大改进
+* HTTP/2.0多了多路复用技术，也就是说在一个TCP连接下可以同时并发处理多个请求。
+* HTTP/2.0使用HPACK算法对header进行压缩。
+* HTTP/2.0采用二进制格式传输数据，而HTTP/1.1采用文本格式。
+* HTTP/2.0引入了“服务端推送（server push）”的概念，它允许服务端在客户端需要数据之前就主动地将数据发送到客户端缓存中，从而提高性能。
 
+### 46.ES6新特性
+* class关键字的支持，更加完整的类的编写模式，支持extends继承。构造函数constructor。
+* lambda表达式，可以替代回调等场景中的匿名函数。
+* promise做并发控制，解决之前的回调地狱问题，参数resolve表示成功，reject表示失败。Then方法表示后续操作，多个后续操作可以用.then链式相连。
+* Promise.all方法可以接受数组，数组内容为Promise对象，也就是说可以多个promise并行运行，返回值为resolve数组。
+* 还有一个和Promise.all相类似的方法Promise.race，它同样接收一个数组，只不过它只接受第一个被resolve的值。
+* let与const关键字，let定义了变量的块级作用域，const表示常量无法被修改。
+* 模块化编程，多了module的开发模式，根据需要进行export和import。
 
-### TO BE CONTINUED
+### 47.HTTP常见返回码
+* 100，Continue，继续。
+* 200，成功返回。
+* 304，not modified。
+* 302，临时重定向。
+* 301，网页被移动到了新位置。
+* 201，请求成功并创建了新的资源。
+* 400，bad request，请求格式错误。
+* 401，未授权。
+* 403，forbidden，禁止访问。
+* 404，未找到网页文件。
+* 500，服务器内部错误。
+
+### 48.Javascript绑定事件为什么尽量不要写在HTML中
+HTML与Javascript要尽量分离，易于维护。
+HTML绑定事件只能绑定有限个事件，但是用js的addEventListener可以绑定多个事件。
+
+### 49.模块化规范AMD和CMD的区别
+AMD是提前执行，CMD是延迟执行。AMD把依赖在最开始就全都写好。
+
+### 50.脱离文档流的含义
+就是将元素从普通布局排版中拿走，其他盒模型在定位的时候会无视其存在。
+两种脱离文档流的方法：float和position：absolute。
+float脱离文档流后，元素内部的文本不会无视脱离出来的元素，但是其父盒模型会。
+position：absolute脱离文档流后，元素和内部的文本都会无视脱离出来的元素。
+
+### 51.IE兼容性问题
+
+* “\9”区分IE和其他浏览器。
+* “*，+”区分IE6，IE7.
+* “\0”区分IE8,9,10.
+
+### TO BE CONTINUED！
