@@ -161,6 +161,7 @@ header, footer, aside, section, article, hgroup, nav...
 例子:
 
 ```javascript
+//单例模式
 var Counter = (function() {
     var private_counter = 0;
     function increase() {
@@ -177,9 +178,8 @@ var Counter = (function() {
     }
 })();
 
-var counter1 = new Counter();
-counter1.plus1();
-counter1.value();
+Counter.plus1();
+Counter.value();
 ```
 
 ### 21. 正向代理与反向代理
@@ -245,7 +245,7 @@ XSS攻击,跨站脚本攻击,恶意js代码注入.
 
 CSRF攻击,跨站请求伪造.
 场景:在网站A登录后产生了Cookie,在会话期有效时间内访问网站B,网站B伪造了一个访问A的链接,当用户在B上点击链接后,服务器接收到的请求无法区分A,B站来源,因为都有之前产生的cookie.所以服务器会再次接受请求并执行相应逻辑.
-防御方法:正确使用POST和GET,还可以用验证码的方式拒绝其它站点的伪造请求.或者在提交表单时添加伪随机数,服务器端进行伪随机数校验.
+防御方法:正确使用POST和GET,还可以用验证码的方式拒绝其它站点的伪造请求.还有验证HTTP Referer字段,若是来自同一网站则Refered字段都会是同一URL.或者在发送HTTP时添加token,服务器端进行token校验.
 
 ### 29. HTML中的img标签有Alt和Title属性,有什么区别
 
@@ -448,9 +448,44 @@ float脱离文档流后，元素内部的文本不会无视脱离出来的元素
 position：absolute脱离文档流后，元素和内部的文本都会无视脱离出来的元素。
 
 ### 51.IE兼容性问题
-
 * “\9”区分IE和其他浏览器。
 * “*，+”区分IE6，IE7.
 * “\0”区分IE8,9,10.
+
+### 52.CSS3的transition,transform和animation
+transition:`-webkit-transition: all 3s ease-in-out 0s;`,渐变所有属性,3秒变化时间,ease-in-out时间变化曲线,0秒延迟.
+transform:`-webkit-tranform: rotate(60deg);`,顺时针旋转60度,还有多个变化属性,如scale,skew,translate等,分别有对应X,Y的变化.
+animation:
+```css
+@-webkit-keyframe 'animation-name' {
+  from {
+    width: 30px;
+  }
+  75% {
+    width: 60px;
+  }
+  to {
+    width: 90px;
+  }
+}
+```
+
+### 53.HTTPS加密原理
+* 1.服务器拥有一组私钥和公钥,在接收到客户端HTTPS443端口的请求时,先把公钥发给客户端.
+* 2.客户端校验公钥,包括有效期等信息,没有问题的话则生成一组随机码,并用公钥加密,发送给服务器.
+* 3.服务器接收到之后用其私钥进行解密,获得到这个随机key值,并用这个key加密要传给客户端的实体数据.
+* 4.客户端再用这个key码用特定的解密算法进行decode,获得到服务器的数据.
+
+### 54.消息队列和事件循环(Task Queue & Event Loop)
+Javascript是单线程的,因此,为了尽最大利用CPU,js事件分为了同步和异步事件,同步事件全部排在主线程中按序执行,而异步事件不同.
+
+异步事件通常会有回调函数,当事件执行结束后,就会发送一个消息到任务队列中,通常这个消息就是回调函数本身,当某一微小时刻,主线程的任务都执行完毕时就会从消息队列中取一个消息并执行.
+
+这个过程就叫做事件循环.概述为:
+
+* 1.主线程有一个执行栈,执行当前时刻同步任务.
+* 2.当异步任务执行完毕后,将回调放入消息队列中.
+* 3.当执行栈没有任务时,主线程从消息队列取一个消息执行.
+* 4.主线程重复以上过程.
 
 ### TO BE CONTINUED！
