@@ -41,7 +41,7 @@ Javascript是一种原型语言,类的概念在javascript中是过时的.虽然�
 
 ### 5. CSS3一些新特性
 
-边框border,阴影box-shadow,动画rotate,盒模型box,文字效果word-wrap,透明度opacity等.
+阴影box-shadow,动画rotate,盒模型box,文字效果word-wrap,透明度opacity等.
 
 ### 6. Ajax原理
 
@@ -138,7 +138,7 @@ header, footer, aside, section, article, hgroup, nav...
 
 原型链类似于继承关系.
 
-只有构造函数才有prototype,对象没有.
+只有函数才有prototype.
 
 每个对象都有__proto__来记录自己的原型链,__proto__就是指向父的原型prototype.
 
@@ -227,6 +227,8 @@ js不能访问直接非同源的资源,同源是指域名,协议,端口都相同
 ### 27. Javascript事件委托
 
 事件委托指的是不直接在元素上绑定监听事件,而是在其父元素上绑定,这样可以在一些情况下提高效率.
+
+它是发生在冒泡阶段的.
 
 如:
 ```html
