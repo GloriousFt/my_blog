@@ -41,7 +41,7 @@ Javascript是一种原型语言,类的概念在javascript中是过时的.虽然�
 
 ### 5. CSS3一些新特性
 
-边框border,阴影box-shadow,动画rotate,盒模型box,文字效果word-wrap,透明度opacity等.
+阴影box-shadow,动画rotate,盒模型box,文字效果word-wrap,透明度opacity等.
 
 ### 6. Ajax原理
 
@@ -51,9 +51,14 @@ Javascript是一种原型语言,类的概念在javascript中是过时的.虽然�
 var xmlhttp = new XMLHttpRequest();
 xmlhttp.open(method, url, true);
 xmlhttp.send();
+xmlHttp.onreadystatechange = function(){
+    if(xmlHttp.readyState === 4 & xmlHttp.status === 200){
+    }
+}
 ```
 
 ### 7. 一些前端优化方法
+方向:请求数量,页面结构,缓存利用
 
 * 使用CDN，减小服务器负担
 * 减少HTTP请求数,合理设置HTTP缓存
@@ -83,9 +88,11 @@ typeof是用来返回变量类型的,不区分Array和Object,而instanceof是用
 
 ### 11. Session和Cookie的区别
 
-* Cookie是浏览器端的缓存,而Session是服务器端的缓存.
+* 它们都是记录用户状态的机制,但Cookie是存在浏览器端,而Session是对服务器端而言的.
 * Cookie相对来说不安全,可在客户端主机上直接获取得到.
-* Cookie是浏览器端为了区分不同用户数据而形成的,弥补了HTTP的无状态性,而Session是服务器端为了记录不同用户访问状态的服务器端存储.
+* Session是通常存在服务器端的内存中的.
+* Session没被访问一次都会更新上次访问时间.
+* Session的ID通常需要Cookie存储,或从URL中获取.
 
 ### 12. HTML常见行内元素
 
@@ -115,13 +122,16 @@ DOCTYPE声明了文档类型.HTML5只有一种文档类型,HTML4.01有三种.
 header, footer, aside, section, article, hgroup, nav...
 
 ### 16. 浏览器缓存和Cookie的关系
-
-Cookie也是浏览器缓存的一种方式,不过多是用于用户认证的,通常设置数据缓存都是设置HTTP头部的cache-control(设置相对时间)或者expire(设置固定期限).
-LocaleStorage,SessionStorage的数据容量都比较大,cookie只有4kb,相对较小.
+* Cookie也是浏览器缓存的一种方式,不过多是用于用户认证的,通常设置数据缓存有效期都是设置HTTP头部的cache-control(设置相对时间)或者expire(设置固定期限).
+* LocalStorage,SessionStorage是专用做存储的，它们的的数据容量都比较大,cookie只有4kb,相对较小.
+* Web Storage拥有自己的设置和获取数据方法如setItem，getItem，removeItem，clear等，但是cookie就没有，完全需要js实现相应方法。
 
 ### 17. 前端跨域访问方法
 
-* JSONP,JQuery中AJAX请求可以用JSONP,同时要修改服务器端.
+* JSONP,JQuery中AJAX请求可以用JSONP（JSON+PADDING）。只支持GET。
+  JSONP原理是站中生成一个script标签，src为地址，同时向服务器提供一个回调（可以写到URL中或是约定好），服务器用这个回调的名字作为函数包住JSON数据做返回，回调的参数就是返回的对象数据。然后js在回调中做后续处理。
+  JSONP的缺点就是没有HTTP返回状态码,而且只支持GET请求.
+  JSONP安全问题:返回参数被修改(结合XSS)
 * 代理服务器的方法,也就是将请求转到后台去,安全.
 * HTML5中webSocket的方法.
 * iframe的方法.
@@ -131,7 +141,7 @@ LocaleStorage,SessionStorage的数据容量都比较大,cookie只有4kb,相对�
 
 原型链类似于继承关系.
 
-只有构造函数才有prototype,对象没有.
+只有函数才有prototype.
 
 每个对象都有__proto__来记录自己的原型链,__proto__就是指向父的原型prototype.
 
@@ -145,7 +155,7 @@ LocaleStorage,SessionStorage的数据容量都比较大,cookie只有4kb,相对�
 
 ### 20. Javascript闭包的意义与作用
 
-闭包的形式就是一个函数定义并返回了一个内部函数,这个内部函数可以操作其内部变量.
+闭包的形式就是一个函数定义立即执行并返回了一个内部函数,这个内部函数可以操作其内部变量.
 
 作用:最大的作用就是可以用闭包实现一个函数内部变量的私有化.如下例,`private_counter`和`increase`无法直接被调用,闭包起到了私有化的作用.
 
@@ -154,6 +164,7 @@ LocaleStorage,SessionStorage的数据容量都比较大,cookie只有4kb,相对�
 例子:
 
 ```javascript
+//单例模式
 var Counter = (function() {
     var private_counter = 0;
     function increase() {
@@ -170,9 +181,8 @@ var Counter = (function() {
     }
 })();
 
-var counter1 = new Counter();
-counter1.plus1();
-counter1.value();
+Counter.plus1();
+Counter.value();
 ```
 
 ### 21. 正向代理与反向代理
@@ -221,6 +231,8 @@ js不能访问直接非同源的资源,同源是指域名,协议,端口都相同
 
 事件委托指的是不直接在元素上绑定监听事件,而是在其父元素上绑定,这样可以在一些情况下提高效率.
 
+它是发生在冒泡阶段的.
+
 如:
 ```html
 <ul>
@@ -232,9 +244,16 @@ js不能访问直接非同源的资源,同源是指域名,协议,端口都相同
 
 ### 28. Web安全问题
 
-XSS攻击,跨站脚本攻击,恶意js代码注入. 防御方法:转义script,或后台进行转义防范.服务器端进行HttpOnly设置.
+XSS攻击,跨站脚本攻击,恶意js代码注入.
+场景:在网站A注册了一个带有恶意JS代码的用户，恶意代码可能为将document.cookie发送给攻击者网站，服务器将其存到了数据库中。这样当其他用户访问数据库获取到这个恶意代码并在页面上显示的时候，大量用户的cookie信息都会发送给攻击者。
+防御方法:转义script,对输入进行过滤,输出进行编码.服务器端还可以进行HttpOnly设置,使浏览器禁止访问cookie.
 
-CSRF攻击,跨站请求伪造. 防御方法,正确使用POST和GET,还可以用验证码的方式拒绝其它站点的伪造请求.
+CSRF攻击,跨站请求伪造.
+场景:在网站A登录后产生了Cookie,在会话期有效时间内访问网站B,网站B伪造了一个访问A的链接,当用户在B上点击链接后,服务器接收到的请求无法区分A,B站来源,因为都有之前产生的cookie.所以服务器会再次接受请求并执行相应逻辑.
+防御方法:
+* 正确使用POST和GET,还可以用验证码的方式拒绝其它站点的伪造请求.
+* 还有验证HTTP Referer字段,若是来自同一网站则Refered字段都会是同一URL.
+* 或者在发送HTTP时添加token,服务器端进行token校验.Token是在登录时服务端返回给客户端的,应该存在localstorage里.
 
 ### 29. HTML中的img标签有Alt和Title属性,有什么区别
 
@@ -315,10 +334,10 @@ W3C默认是事件冒泡,addEventListener('click',function(){},false);
 
 ### 38. CSS属性box-sizing是做什么用的
 
-*`box-sizing:content-box`,规定高度与宽度是盒模型的content高度.
-*`box-sizing:border-box`,规定高度与宽度是盒模型的content与padding和border之和.也是最为常见的.
+*`box-sizing:content-box`,规定高度与宽度是盒模型的content高度,也是CSS3默认的.
+*`box-sizing:border-box`,规定高度与宽度是盒模型的content与padding和border之和.
 
-### 39. CSS3画三角和圆
+### 39. CSS3画三角和圆,椭圆
 
 三角:
 ```css
@@ -330,14 +349,155 @@ W3C默认是事件冒泡,addEventListener('click',function(){},false);
     border-right: 5px solid transparent;
 }
 ```
-圆:
+圆,椭圆:
 ```css
 .circle {
     width: 100px;
     height: 100px;
+    //height: 50px; //椭圆
     border-radium: 50%;
     background-color: #000;
 }
 ```
 
-### TO BE CONTINUED
+### 40.HTTP头部中expires和cache-control的作用
+
+只有get请求才会被缓存,post不会.
+
+cache-control中有不同的值,不同值的含义不同:
+* no-cache表示不设置缓存.
+* max-age表示客户端可以接收生存期不大于指定时间（以秒为单位）的响应.
+* Public指响应可被任何缓存区缓存,Private指只能被当前用户缓存.
+
+Expires 表示存在时间,允许客户端在这个时间之前不去检查（发请求）,等同max-age的效果.
+但是如果同时存在,则被Cache-Control的max-age覆盖.
+
+### 41.Cache-control的具体控制功能
+
+* 1.打开新窗口
+private,no-cache和must-revalidate,打开新窗口都会重新访问服务器.
+max-age的话,有效期内不会重新访问.
+* 2.地址栏回车
+private,must-revalidate第一次会重新访问服务器.
+no-cache每次都会重新访问.
+max-age,有效期内不会重新访问.
+* 3.后退
+值为no-cache的话每次都会重新访问服务器.其他值不会.
+* 4.刷新页面
+无论何值,都会重新访问.
+
+### 42.ETag和Last-Modified的作用
+
+用作判断是否需要重新传数据的一个判断标志.
+可以在服务器端进行配置.ETAG是HTTP1.1的,而Last-Modified是HTTP1.0的.
+
+客户端第一次访问服务器时:
+返回的HTTP头部会有ETAG和Last-Modified值.
+客户端第二次访问服务器时:
+请求的HTTP头部会有If-None-Match,值为ETAG值.还有If-Modified-Since,值为Last-Modified值.
+服务器端接收到第二次请求时:
+发现If-None-Match的值跟之前的ETAG值相同,则返回304,告知客户端Not Modified,客户端则可以继续用之前获得到的数据.
+
+ETAG和Last-Modified相比具有更高优先级,后者只能到秒级,因此如在1s内连续访问服务器的话则需要进行ETAG的设置来进行优化.
+另外如果服务器只对某个文件时间进行了修改,后者也会认为是修改了文件,因此还会重传文件,前者则不会.
+
+### 43.Cookie Free优化原理
+Cookie Free就是指将图片,css,js等静态资源从主域名的服务器上分离出来放到子域下的服务器上,通过设置cookie的domain使得请求这些资源时不再发送cookie.
+同时,使用多个域名也可以加大数据请求并发量.
+
+### 44.浏览器几种缓存情况
+Last-Modofied,ETAG,Expires,Cache-Control
+
+Last-Modofied,ETAG仍然需要浏览器访问一次服务器,如果服务器计算的ETAG相同,则返回304,无实体信息.
+
+Expires,Cache-Control则不需要再访问服务器,只需要看有效时间即可.浏览器直接返回200(from cache).
+
+上述的几种在刷新页面的情况下都会重新访问服务器.
+
+### 45.HTTP/2.0相比于HTTP/1.1的重大改进
+* HTTP/2.0多了多路复用技术，也就是说在一个TCP连接下可以同时并发处理多个请求。
+* HTTP/2.0使用HPACK算法对header进行压缩。
+* HTTP/2.0采用二进制格式传输数据，而HTTP/1.1采用文本格式。
+* HTTP/2.0引入了“服务端推送（server push）”的概念，它允许服务端在客户端需要数据之前就主动地将数据发送到客户端缓存中，从而提高性能。
+
+### 46.ES6新特性
+* class关键字的支持，更加完整的类的编写模式，支持extends继承。构造函数constructor。
+* lambda表达式，可以替代回调等场景中的匿名函数。
+* promise做并发控制，解决之前的回调地狱问题，参数resolve表示成功，reject表示失败。Then方法表示后续操作，多个后续操作可以用.then链式相连。
+* Promise.all方法可以接受数组，数组内容为Promise对象，也就是说可以多个promise并行运行，返回值为resolve数组。
+* 还有一个和Promise.all相类似的方法Promise.race，它同样接收一个数组，只不过它只接受第一个被resolve的值。
+* let与const关键字，let定义了变量的块级作用域，const表示常量无法被修改。
+* 模块化编程，多了module的开发模式，根据需要进行export和import。
+
+### 47.HTTP常见返回码
+* 100，Continue，继续。
+* 200，成功返回。
+* 304，not modified。
+* 302，临时重定向。
+* 301，网页被移动到了新位置。
+* 201，请求成功并创建了新的资源。
+* 400，bad request，请求格式错误。
+* 401，未授权。
+* 403，forbidden，禁止访问。
+* 404，未找到网页文件。
+* 500，服务器内部错误。
+
+### 48.Javascript绑定事件为什么尽量不要写在HTML中
+HTML与Javascript要尽量分离，易于维护。
+HTML绑定事件只能绑定有限个事件，但是用js的addEventListener可以绑定多个事件。
+
+### 49.模块化规范AMD和CMD的区别
+AMD是提前执行，CMD是延迟执行。AMD把依赖在最开始就全都写好。
+
+### 50.脱离文档流的含义
+就是将元素从普通布局排版中拿走，其他盒模型在定位的时候会无视其存在。
+两种脱离文档流的方法：float和position：absolute。
+float脱离文档流后，元素内部的文本不会无视脱离出来的元素，但是其父盒模型会。
+position：absolute脱离文档流后，元素和内部的文本都会无视脱离出来的元素。
+
+### 51.IE兼容性问题
+* “\9”区分IE和其他浏览器。
+* “*，+”区分IE6，IE7.
+* “\0”区分IE8,9,10.
+
+### 52.CSS3的transition,transform和animation
+transition:`-webkit-transition: all 3s ease-in-out 0s;`,渐变所有属性,3秒变化时间,ease-in-out时间变化曲线,0秒延迟.
+transform:`-webkit-tranform: rotate(60deg);`,顺时针旋转60度,还有多个变化属性,如scale,skew,translate等,分别有对应X,Y的变化.
+animation:
+```css
+@-webkit-keyframe 'animation-name' {
+  from {
+    width: 30px;
+  }
+  75% {
+    width: 60px;
+  }
+  to {
+    width: 90px;
+  }
+}
+```
+
+### 53.HTTPS加密原理
+* 1.服务器拥有一组私钥和公钥,在接收到客户端HTTPS443端口的请求时,先把公钥发给客户端.
+* 2.客户端校验公钥,包括有效期等信息,没有问题的话则生成一组随机码,并用公钥加密,发送给服务器.
+* 3.服务器接收到之后用其私钥进行解密,获得到这个随机key值,并用这个key加密要传给客户端的实体数据.
+* 4.客户端再用这个key码用特定的解密算法进行decode,获得到服务器的数据.
+
+### 54.消息队列和事件循环(Task Queue & Event Loop)
+Javascript是单线程的,因此,为了尽最大利用CPU,js事件分为了同步和异步事件,同步事件全部排在主线程中按序执行,而异步事件不同.
+
+异步事件通常会有回调函数,当事件执行结束后,就会发送一个消息到任务队列中,通常这个消息就是回调函数本身,当某一微小时刻,主线程的任务都执行完毕时就会从消息队列中取一个消息并执行.
+
+这个过程就叫做事件循环.概述为:
+
+* 1.主线程有一个执行栈,执行当前时刻同步任务.
+* 2.当异步任务执行完毕后,将回调放入消息队列中.
+* 3.当执行栈没有任务时,主线程从消息队列取一个消息执行.
+* 4.主线程重复以上过程.
+
+### 54.HTML中,为什么要尽量把Javascript放到body的最下面
+
+因为页面是边加载边渲染的,当页面渲染时碰到了script标签,页面的下载和渲染都必须停下来等待脚本执行完成.把js放在下面可以让css等先加载出来,先让用户看到页面.另外也是因为当js有DOM操作的时候,放在中间可能页面还没加载完成.
+
+### TO BE CONTINUED！
