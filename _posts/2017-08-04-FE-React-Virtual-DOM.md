@@ -33,6 +33,8 @@ Virtual DOM会根据Diff算法来计算出哪里有变化，然后把新的Virtu
 
 答案是肯定的，因为只修改一个值，React还要经过render，Diff算法，DOM操作。这显然要比直接DOM修改一个节点的值要慢。
 
+<!--more-->
+
 那么Virtual DOM的优势在哪里呢？
 
 试想，在一个Component中，开发者要一次修改state中的很多属性，属性可能是对象，数组，每一个属性都会对应到页面中的一个节点的值。
