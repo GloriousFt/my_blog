@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "前端常见问题（二）"
-date: 2017-08-3 10:29:59.000000000 +08:00
+date: 2017-08-03 10:29:59.000000000 +08:00
 type: post
 published: true
 status: publish
