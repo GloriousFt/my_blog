@@ -80,14 +80,14 @@ function Duck() {
 }
 
 function Animal() {}
-Parent.prototype.bark = function(sound) {
+Animal.prototype.bark = function(sound) {
     this.sound = sound;
     console.log(sound);
 };
 
 extend(Duck, Animal);
 
-var child = new Child();
+var child = new Duck();
 
 console.log(child.sound);
 child.bark('Ga!');
