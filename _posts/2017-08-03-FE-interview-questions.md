@@ -163,8 +163,7 @@ CSRF是跨站请求伪造，基本原理是，在某一第三方网站构造假�
 
 **防御方式**：
 * 大型应用可以用验证码这一方式，验证码的内容通常是无法伪造的。
-* 还可以用token的方式，前端在向后台发请求时要带着一个从服务器建立session时发给用户的token，这个token服务器端就存储在session中。
-当前端发送请求时要带着这个token，后台校验token成功后再进行后续操作。
+* 还可以用token的方式，前端在向后台发请求时要带着一个从服务器建立session时发给用户的token，这个token服务器端就存储在session中。当前端发送请求时要带着这个token，后台校验token成功后再进行后续操作。
 * 当然最基本的还是要明确GET，POST，PUT等请求，不能随便用GET来更新后台数据库。
 
 ### 5.HTTP协议相关
@@ -233,3 +232,34 @@ HTTPS是用SSL协议加密了明文HTTP的协议，更加安全。
 
 析构：
 * componentWillUnMount
+
+### 8.CORS跨域请求
+CORS只能用不低于IE10以上的浏览器实现。
+
+它是一种实现跨域请求的方法，浏览器对这种请求分为两种模式：简单模式，非简单模式。
+
+简单请求满足的条件为：
+* 1.请求类型为HEAD，GET或POST中的一种。
+* 2.HTTP请求头信息只能最多包含：Accept，Accept-Language，Last-Event-Id，Content-Language，Content-Type。Content Type只能为application/x-www-form-urlencoded、multipart/form-data、text/plain。
+
+简单请求原理是，客户端发送XMLHttpRequest，如果是跨域的，浏览器会加上字段origin。
+
+如果服务器许可接收origin字段的域发来的请求，那么会在响应报头上多出四个字段：
+* Access-Control-Allow-Origin，表示接收的域名请求，"*"表示接收任意域名请求。
+* Access-Control-Allow-Credentials，只能为true，表示可以带cookie访问。
+* Access-Control-Expose-Headers，表示返回的其他的自定义字段名。
+* Content-Type
+
+如果要带着cookie请求，浏览器还要设置`withCredential=true`。而且服务器返回的`Access-Control-Allow-Origin`就不能是"*"。
+
+非简单请求要先发送一个预检的HTTP请求，请求类型为`OPTIONS`。
+多包含了：
+* Origin，表示请求来自的源。
+* Access-Control-Request-Method，表示请求的方法。
+* Access-Control-Request-Headers，表示加带的其他字段。
+
+服务器接收到这个请求之后，判断Origin是否许可，然后返回HTTP：
+* Access-Control-Allow-Methods，表明服务器支持的所有跨域请求的方法。
+* Access-Control-Allow-Headers，表明服务器支持的所有头信息字段。
+* Access-Control-Allow-Credentials，表明是否可以带cookie。
+* Access-Control-Max-Age，表明这次检索的有效期。
