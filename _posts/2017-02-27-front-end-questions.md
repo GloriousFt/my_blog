@@ -530,5 +530,20 @@ align-self
 
 圣杯布局是，中间栏用padding来控制中间栏位置。
 
+### 58.BFC是什么？
+
+BFC是Block Formatted Context的缩写，意为块级格式化上下文。
+
+特点是：
+
+BFC内的元素，都是垂直分布的，上下`margin`间会重合。内部元素不会影响外边。
+
+产生条件是以下任意一个：
+
+* `position`为`fixed`或者`absolute`。
+* `display`为`table-cell`，`inline-block`或`flex`。
+* `float`不为`none`。
+* `overflow`不为visible。
+* 根元素。
 
 ### TO BE CONTINUED！
