@@ -522,5 +522,13 @@ flex
 align-self
 ```
 
+### 57.CSS双飞翼布局和圣杯布局
+
+都是实现三栏布局，中间自适应。不同点在于对中间栏的处理不同。
+
+双飞翼是，中间栏内部加一个block元素，margin-left和margin-right分别为左右边栏的宽度。
+
+圣杯布局是，中间栏用padding来控制中间栏位置。
+
 
 ### TO BE CONTINUED！
