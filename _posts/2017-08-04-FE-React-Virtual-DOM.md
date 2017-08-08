@@ -8,7 +8,9 @@ status: publish
 categories:
 - Technology
 tags:
-- Javascript, React, Virtual DOM
+- Javascript
+- React
+- Virtual DOM
 meta:
   _edit_last: '1'
 ---

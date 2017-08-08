@@ -8,7 +8,11 @@ status: publish
 categories:
 - Technology
 tags:
-- Javascript, Closure, Prototype, CSRF, XSS
+- Javascript
+- Closure
+- Prototype
+- CSRF
+- XSS
 meta:
   _edit_last: '1'
 ---
