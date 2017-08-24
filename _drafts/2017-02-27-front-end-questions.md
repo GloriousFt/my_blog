@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "前端方向的一些零散小问题"
+title: "前端常见问题（一）"
 date: 2017-02-27 14:34:59.000000000 +08:00
 type: post
 published: true
@@ -286,30 +286,30 @@ XHTML其实就是HTML4.01,但是更为严格,以XML的标准,要求标签必须�
 Content-Type是用来规定数据类型的,可以是`application/x-www-form-urlencoded`,那携带的数据就为Form Data方式发送的.
 如果是`text/plain;charset=UTF-8`,那么携带的数据就是以requestPayload的方式发送的.
 
-### 33. Javascript中的继承
+### 33. Javascript中的原型继承
 
 ```javascript
-function Animal(name) {
-  this.name = name;
-}
-
-Animal.prototype.bark = function(sound) {
-  console.log(sound);
-}
-
 function extend(Child, Parent) {
-  Child.prototype = Object.create(Parent.prototype);
-  Child.prototype.contructor = Child;
+    Child.prototype = Object.create(Parent.prototype);
+    Child.prototype.constructor = Child;
+}
+function Duck() {
+  this.name = "Child";
 }
 
-function Duck(name, age) {
-  this.age = age;
-}
+function Animal() {}
+Parent.prototype.bark = function(sound) {
+    this.sound = sound;
+    console.log(sound);
+};
 
 extend(Duck, Animal);
 
-var duck1 = new Duck('Donald', 2);
-duck1.bark();
+var child = new Child();
+
+console.log(child.sound);
+child.bark('Ga!');
+console.log(child.sound);
 ```
 
 ### 34. JQuery中的$(window).load和$(document).ready区别
@@ -432,9 +432,10 @@ Expires,Cache-Control则不需要再访问服务器,只需要看有效时间即�
 ### 47.HTTP常见返回码
 * 100，Continue，继续。
 * 200，成功返回。
+* 300，多个选择。
 * 304，not modified。
-* 302，临时重定向。
-* 301，网页被移动到了新位置。
+* 307，临时重定向。
+* 301，网页被永久地移动到了新位置。
 * 201，请求成功并创建了新的资源。
 * 400，bad request，请求格式错误。
 * 401，未授权。
@@ -522,5 +523,28 @@ flex
 align-self
 ```
 
+### 57.CSS双飞翼布局和圣杯布局
+
+都是实现三栏布局，中间自适应。不同点在于对中间栏的处理不同。
+
+双飞翼是，中间栏内部加一个block元素，margin-left和margin-right分别为左右边栏的宽度。
+
+圣杯布局是，中间栏用padding来控制中间栏位置。
+
+### 58.BFC是什么？
+
+BFC是Block Formatted Context的缩写，意为块级格式化上下文。
+
+特点是：
+
+BFC内的元素，都是垂直分布的，上下`margin`间会重合。内部元素不会影响外边。
+
+产生条件是以下任意一个：
+
+* `position`为`fixed`或者`absolute`。
+* `display`为`table-cell`，`inline-block`或`flex`。
+* `float`不为`none`。
+* `overflow`不为visible。
+* 根元素。
 
 ### TO BE CONTINUED！
