@@ -72,7 +72,9 @@ xmlHttp.onreadystatechange = function(){
 
 ### 8. Javascript数据类型
 
-Number, Boolean, String, Array, Object, NULL, Undefined...
+6种：Number, Boolean, String, Object, NULL, Undefined。
+
+基本数据类型：Number，String，Null，Undefined，Boolean。
 
 ### 9. 浏览器访问一个网站的过程
 

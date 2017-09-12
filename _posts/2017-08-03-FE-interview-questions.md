@@ -288,3 +288,28 @@ Cache-Control有不同的值，分别表示不同的机制，当它的值不是M
 当有效时间过期时，那么会有服务器判断是否服务器这边对请求的资源有更改，如果没有更改则让浏览器继续使用之前的资源，也就是返回304（not modified）。
 
 资源是否有更改的机制则是服务器根据之前发送的ETag和Last-Modify字段来进行判别的，HTTP／1.0是Last-Modify，HTTP／1.1是ETag。
+
+### 11.Javascript的组成
+
+Javascript由三部分组成：
+* ECMAScript 语法核心
+* DOM 文档对象模型
+* BOM 浏览器对象模型
+
+ECMAScript是Javascript的语法核心，它规定实现了JS的语法、类型、语句、关键字、对象等，提供核心语言功能。
+
+DOM提供了对HTML操作交互的API。
+
+BOM提供了对浏览器操作的API，如navigator对象，location对象，screen对象等。
+
+### 12.defer和async的区别
+
+defer是定义延迟脚本，表示立即下载，但延迟执行，HTML5规定执行顺序为从上到下按序执行。
+
+async是定义异步脚本，表示立即下载，但执行顺序不确定，下载完成后执行。
+
+### 13.函数中arguments
+
+arguments表示函数中的实参，当arguments内容改变时，其对应函数的实参也会被改变，但是这个改变是同步改变，不是指向同一地址的改变。
+
+arguments的操作跟数组相似，但它并不是一个数组，它不是Array的一个实例。
