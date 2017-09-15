@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "前端常见问题（二）"
+title: "前端常见问题（二）- 进阶篇"
 date: 2017-08-03 10:29:59.000000000 +08:00
 type: post
 published: true
@@ -325,3 +325,85 @@ Javascript的参数都是值传递的，参数传递过程其实就是一个变�
 如果参数是基本数据类型，存放到栈上的话，那么调用时传递的参数就是栈内容的复制。
 
 如果参数是引用数据类型，数据是存放到堆上的话，那么调用时传递的值其实是存放在栈上引用的地址的复制。
+
+### 15.对象的转换方法
+
+所有对象都有toString(), valueOf()和toLocaleString()方法。
+
+valueOf()会返回对象的值。
+
+toString()会返回对象的字符串表达值，如果是数组则返回以逗号分割的数组每一项拼接的字符串值。在数组中，它其实是调用了每一项的toString方法。
+
+在Array.sort()的方法中，其实也是调用了每一项的toString才进行排序的。
+
+toLocaleString()与toString()相同，不同的就是数组时调用的每一项的toLocaleString()。
+
+### 16.数组的concat，slice，splice
+
+concat方法会创建一个当前数组的副本，然后按参数拼接到新数组后面并返回副本。
+
+slice方法会根据参数创建一个新数组。
+
+splice方法会修改原数组，返回删除的项。
+
+### 17.函数Function类型
+
+函数名仅仅是指向函数的指针，因此：
+
+```javascript
+function f1(a) {
+    alert(a);
+}
+var f2 = f1;
+f2(1);
+f1 = null;
+f2(1);
+```
+
+会发现代码依然会执行alert，`f1 = null`只会把f1指针置空。
+
+这也说明了为什么js没有函数重载，后定义的函数会覆盖前面的函数，因为函数名只是指针。
+
+**函数声明**
+
+函数声明会在执行环境中提前解析，这是解析器的特性，但用函数表达式的函数定义就不会提前解析，如：
+
+```javascript
+f1(2);
+function f1(a) {
+    alert(a);
+}
+
+f2(3);
+var f2 = function(a) {
+    alert(a);
+}
+```
+
+结果会显示f1的alert，也就是2，而`f2(3)`这行代码则会报错，"f2不是一个函数"。
+
+**函数的属性和方法**
+
+所有函数都有两个属性，length和prototype。
+
+length表示要接受的参数的个数。
+
+prototype是保存函数实例方法的真正所在。比如toString等方法都是在prototype里面的。
+
+所有函数都有两个方法，call和apply。
+
+它们都是用于改变函数的执行环境的，不同点在于接收的参数不同。
+
+ES5中还定义了bind方法，它返回一个函数的实例，参数是执行环境的变量对象。
+
+```javascript
+var obj = {
+    color : "red"
+}
+function showColor() {
+    alert(this.color)
+}
+var bindColor = showColor.bind(obj);
+bindColor(); //red
+showColor(); //undefined
+```
