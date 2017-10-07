@@ -440,3 +440,71 @@ test的变量对象有arguments,a和b.
 `arguments = [5, 10];`
 `a = 5;`
 `b = 10;`
+
+### 19.模块模式 Module Pattern
+
+模块模式就是利用闭包实现建立单例对象的一种模式.
+
+增强模块模式(单例是特定类型)
+
+```javascript
+var singleton = function() {
+  var privateVar = 10;
+
+  var obj = new Custom();
+  obj.publicInc = function() {
+    privateVar++;
+  }
+
+  return obj;
+}();
+
+singleton.publicInc();
+```
+
+### 20.web模拟移动端滑动事件
+
+有以下移动端触摸事件:
+
+touchstart, touchmove, touchend, touchcancel
+
+每个事件都有一下属性:
+
+* touches: 当前跟踪的触摸操作Touch对象数组.
+* targetTouches: 特定于目标事件的Touch对象数组.
+* changeTouches: 自上次触摸以来发生了什么改变的Touch对象数组.
+
+每个Touch对象的属性:
+
+clientX, clientY, pageX, pageY, screenX, screenY, identifier, target.
+
+模拟手势滑动:
+
+可以用touchstart和touchend.
+
+在touchstart中取起始坐标值,clientX,clientY.
+
+在touchend中获取结束的坐标点,然后计算差值,并重置起始坐标.
+
+### 21.HTML5中js的postMessage
+
+*postMessage:*
+
+用在与包含在内部的<iframe>元素或者当前页面弹出的窗口进行数据交互时使用.
+
+```javascript
+//发送方
+window.postMessage('text message', 'https://www.xxx.com');
+
+//接收方
+window.onmessage = function(event) {
+  if (event.origin === 'https://www.xxx.com') {
+    ...
+    console.log(event.data); // 'text message'
+    //继续操作
+  }
+  event.source.postMessage('received!', 'poster address');
+};
+```
+
+
