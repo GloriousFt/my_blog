@@ -507,4 +507,67 @@ window.onmessage = function(event) {
 };
 ```
 
+### 22.Web Sockets跨域方法
+
+Web Sockets是使用Web Sockets协议的一种建立全双工通信的方法.它只在第一次建立连接请求时使用了HTTP协议,之后都是ws协议.
+
+它不限制同源,因此可以跨域,因为不使用HTTP协议,所以服务器也要做相应的变化.
+
+```javascript
+var socket = new WebSocket('www.xxx.com/server.php');
+socket.open();
+socket.send('text');
+socket.onmessage = function (res) {
+  alert(res.data);
+}
+socket.close();
+```
+
+### 23.indexedDB-浏览器数据库
+
+indexedDB是浏览器中存储结构化数据的一种数据库,它不是用表结构来存储,而是用对象来保存数据.
+
+创建对象存储:
+
+```javascript
+var user = {
+  username : 'TOM',
+  userage : 16
+}
+var store = window.indexedDB.createObjectStore('users', {keyPath : 'username'});
+store.add(user);
+```
+
+上面表明创建一个users存储对象,并且用`username`做主键.
+
+indexedDB还有事务的概念,想要修改或读取数据,都要通过事务来组织操作.
+
+```javascript
+var transaction = window.indexedDB.transaction('users');
+```
+
+这样就获取到了users这个存储对象.
+
+详细事务操作方法看MDN的API介绍.
+
+### 24.Web Worker
+
+Web Worker是浏览器实现js后台运算的一种方法,具体实现方式浏览器有所不同,可能会用线程,或者后台进程等方式.
+
+一个worker所执行代码的作用域与使用它的页面的作用域完全不同,是两个作用域.之间的通信要用postmessage和onmessage来处理.
+
+下面是一个进行排序的worker实例.
+
+```javascript
+var data = [2,8,43,4,34,6,3,21,32,5,4,643,5,32,412];
+    worker = new Worker('sort.js');
+worker.onmessage = function() {
+  ...
+  // 后续处理
+}
+
+worker.postMessage(data);
+```
+
+sort.js就是进行排序的一段代码.
 

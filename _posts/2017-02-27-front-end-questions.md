@@ -125,8 +125,12 @@ header, footer, aside, section, article, hgroup, nav...
 
 ### 16. 浏览器缓存和Cookie的关系
 * Cookie也是浏览器缓存的一种方式,不过多是用于用户认证的,通常设置数据缓存有效期都是设置HTTP头部的cache-control(设置相对时间)或者expire(设置固定期限).
-* LocalStorage,SessionStorage是专用做存储的，它们的的数据容量都比较大,cookie只有4kb,相对较小.
+* LocalStorage,SessionStorage是专用做存储的，它们的的数据容量都比较大,不同浏览器规定不同,一般是2.5MB,而cookie只有4KB,相对较小.
 * Web Storage拥有自己的设置和获取数据方法如setItem，getItem，removeItem，clear等，但是cookie就没有，完全需要js实现相应方法。
+
+localStorage有同源限制,只有在用js删除或者用户手动清除缓存的情况下才会删除.
+
+SessionStorage只存在于浏览器标签页打开的时候,刷新并不会删除,但是一旦关闭页面就会删除SessionStorage.
 
 ### 17. 前端跨域访问方法
 
@@ -136,7 +140,7 @@ header, footer, aside, section, article, hgroup, nav...
   JSONP安全问题:返回参数被修改(结合XSS)
 * 代理服务器的方法,也就是将请求转到后台去,安全.
 * HTML5中webSocket的方法.
-* iframe的方法.
+* CORS方法
 * window.postMessage(data,'url'); //url为另一站点
 
 ### 18. Javascript中的原型链
@@ -533,13 +537,25 @@ align-self
 
 圣杯布局是，中间栏用padding来控制中间栏位置。
 
-### 58.BFC是什么？
+### 58.边距塌陷?
+
+当两个块级元素上下毗邻或内部包含时会发生边距塌陷.左右边距不会塌陷.
+
+以下条件可以阻止上下边距塌陷:
+
+* display为inline-block.
+* position为absolute.
+* 元素浮动
+
+BFC元素可以阻止内部子元素与该BFC元素发生内部边距塌陷.
+
+### 59.BFC是什么？
 
 BFC是Block Formatted Context的缩写，意为块级格式化上下文。
 
 特点是：
 
-BFC内的元素，都是垂直分布的，上下`margin`间会重合。内部元素不会影响外边。
+BFC内的元素，都是垂直分布的，上下`margin`间仍会重合。内部元素不会影响外边。
 
 产生条件是以下任意一个：
 
