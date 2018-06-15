@@ -6,7 +6,7 @@
 #url: http://gloriousft.github.io
 baseurl: ""
 title: Tianyi's Blog
-description: Carpe diem. Seize the day, boys. -- DEAD POETS SOCIETY
+description: 热爱游戏，关注前端
 avatar: /assets/img/ogp.png
 # language: ja
 language: zh-CN
@@ -32,7 +32,7 @@ icons:
   reddit:
   soundcloud:
   stack_exchange:  http://stackexchange.com/users/4458189/jason-lee
-  steam:
+  steam: https://steamcommunity.com/id/magiclee544/
   wordpress:
   youtube:
 
