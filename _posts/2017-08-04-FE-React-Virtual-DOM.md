@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "React的Virtual DOM优势到底在哪里"
+title: "React的虚拟DOM优势在哪里"
 date: 2017-08-04 15:03:59.000000000 +08:00
 type: post
 published: true
@@ -15,7 +15,7 @@ meta:
   _edit_last: '1'
 ---
 
-最近学习了React，一直在想React的优势在哪里。都说Virtual DOM提升了性能，可真的是这样吗？
+最近学习了React，一直在想React的优势在哪里。都说虚拟DOM提升了性能，可真的是这样吗？
 
 先来简单说下React的几个概念：
 
