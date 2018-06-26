@@ -14,7 +14,7 @@ meta:
   _edit_last: '1'
 ---
 
-##1.测试代码
+### 1.测试代码
 
 在开发者编写了一个npm包后，最关键的其实就是测试部分，如果只是内部使用的话出了错误改动代码的成本还比较小，如果发布到npm上，几万人在使用的一个包如果出了问题，可能影响的产品就太多了。
 
@@ -45,7 +45,7 @@ script:
 
 然后就可以编写测试脚本了，Mocha是Javascript的测试框架，既可以运行在浏览器环境也可以运行在node.js上，它的用法可以参看[Mocha官网](https://mochajs.org/)，或者阮一峰的博客[测试框架 Mocha 实例教程](http://www.ruanyifeng.com/blog/2015/12/a-mocha-tutorial-of-examples.html)。
 
-##2.配置信息
+### 2.配置信息
 
 当测试任务完成后，就可以安心地准备npm包发布事情了，首先要在package.json里配置信息。
 
@@ -71,7 +71,7 @@ script:
 
 还有一些配置项，具体可参看[npm package.json](https://docs.npmjs.com/files/package.json)
 
-##3.版本发布
+### 3.版本发布
 
 最后发布就很简单了，先去[npm官网](https://www.npmjs.com/)注册一个账号。
 
