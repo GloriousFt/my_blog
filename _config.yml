@@ -7,6 +7,7 @@
 baseurl: ""
 title: Tianyi's Blog
 description: 热爱游戏，关注前端
+keywords: html,javascript,css,算法,前端,面试,渲染,react,npm
 avatar: /assets/img/ogp.png
 # language: ja
 language: zh-CN
