@@ -16,9 +16,9 @@ meta:
 
 ## 1.前言
 
-最近做一个移动端的项目优化，发现vue的nextTick用到了mutation observer方法，后来继续深入研究下去，发现mutation的回调都是放进microtask队列的，而UI的render是在每一次microtask队列清空后就执行的。
+最近做一个移动端的项目优化，发现vue的nextTick用到了mutation observer方法，后来继续研究下去，发现mutation observer的回调都是放进microtask队列的，而UI的render是在每一次事件循环后就执行的。
 
-本文将着重对event loop的概念做讲解，如果你对event loop已经有一定了解，不妨直接看第四部分。
+本文将着重对事件循环-event loop的概念做讲解，如果你对event loop已经有一定了解，不妨直接看第四部分。
 
 ## 2.Event Loop是什么
 
@@ -65,7 +65,7 @@ JS执行栈初始化的时候为空，其余时间将会一直有任务运行。
 
 ## 4.具体代码分析
 
-在Chrome浏览器环境下，下面这段代码，在点击inner的div后，控制台会log什么呢？
+在66版本的Chrome浏览器环境下，下面这段代码，在点击inner的div后，控制台会log什么呢？
 ```html
 <div class="outer">
   <div class="inner"></div>
@@ -122,7 +122,8 @@ timeout
 
 5. 接着修改outer属性，将mutation observer回调放到microtask队列，此时microtask队列有两个任务。
 
-6. onClick执行完，执行栈为空，而microtask队列不为空（此时task队列的event dispatched事件并未执行完，因为还有冒泡），所以会按序取出每一个任务执行，所以先打印`promise`，再打印`mutate`。
+6. onClick执行完，执行栈为空，而microtask队列不为空（此时task队列的event dispatched事件并未执行完，因为还有冒泡），并且执行的OnClick的task是callback，所以即使是在task任务执行过程中，JS引擎也会按序取出microtask
+队列每一个任务执行，所以先打印`promise`，再打印`mutate`。
 
 7. 执行完microtask队列任务，执行栈和microtask队列都为空，所以继续执行task队列的event dispatched事件。
 
@@ -162,7 +163,7 @@ timeout
 
 1. 首先，第一个例子的代码在初始化时，task队列是为空的，能执行到onClick是因为事件监听。但后面这个代码不一样，这个是执行到`inner.click()`才触发的事件，因此，task队列此时其实是有任务的，任务内容就是这一段代码的执行。因此Task队列内容为Run script。
 
-2. inner同步调用onClick，所以先打印`click`，然后setTimeout进入task队列，此时setTimeout队列有两个任务，一个是当前的Run script，一个是新加的setTimeout回调。
+2. inner同步调用onClick，所以先打印`click`，然后setTimeout进入task队列，此时task队列有两个任务，一个是当前的Run script，一个是新加的setTimeout回调。
 
 3. 继续运行onClick，将Promise回调放入microtask队列，再将mutation observer回调放入microtask队列。
 
@@ -176,7 +177,7 @@ observer则不会添加到microtask队列中。但是这并不意味着DOM操作
 
 6. 所有同步代码执行完，将当前的task-Run script移出task队列，执行栈为空，而microtask队列不为空，所以依次打印`promise`, `mutate`, `promise`。
 
-7. microtask队列执行完为空，继续从task队列取出任务一次执行，所以打印两个`setTimeout`。
+7. microtask队列执行完为空，继续从task队列取出任务依次执行，所以打印两个`setTimeout`。
 
 Event Loop就先介绍这么多，有问题可以留言讨论。
 
