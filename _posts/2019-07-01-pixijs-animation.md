@@ -17,16 +17,19 @@ meta:
 # 实现效果
 初始页面
 一进入页面就直接显示动画场景，没有资源加载过渡页。随着用户长按按钮，进入正式场景（以下每个不同用户交互动画简称场景）。
+
 ![](https://raw.githubusercontent.com/GloriousFt/my_blog/gh-pages/assets/img/start-animation.gif)
 
 场景一：溏心蛋会随着用户手势右移而按照固定轨迹移动，随后变成月亮。
 
 场景二：小女孩的“烦恼”会随着用户左右滑动而逐渐消失，同时小女孩还会有个打滚动画。
+
 ![](https://raw.githubusercontent.com/GloriousFt/my_blog/gh-pages/assets/img/tree.gif)
 
 场景三：一棵树会随着用户缩小的手势而变小，到一定程度后会变成西兰花。
 
 场景四：风筝会随着用户放大手势而变大，到一定程度后变成摇尾巴的狗狗。
+
 ![](https://raw.githubusercontent.com/GloriousFt/my_blog/gh-pages/assets/img/dog.gif)
 
 场景五：
@@ -52,6 +55,7 @@ meta:
 
 ### 背景图尺寸
 以iPhone X为例，iPhone X的逻辑分辨率为375 * 812。而我们与设计师沟通的设计稿通常都是750 * 1334像素的，换算一下也就是375 * 667的。所以当我们按照设计稿做出来一个单屏页面时，在iPhone X上显示就会有145像素（812 - 667）的空缺，如下图所示的extra space。
+
 ![](https://raw.githubusercontent.com/GloriousFt/my_blog/gh-pages/assets/img/compare.jpg)
 
 为了填补这一空缺，就需要让设计师填充一些元素在背景图上，但是怎么填充就是上面提到的基准决定的了。如果选择垂直居中，那么就需要在上下同等填充内容。这样，即使在小屏幕的设备上，屏幕中依然能够显示中间重要的信息部分。
@@ -60,12 +64,15 @@ meta:
 
 ### 基准场景
 比如下图的遮罩提示，从设计的角度来说，为了符合人类默认行为，肯定会把这种提示放在离屏幕下面一定的距离，让用户用拇指直接就能触到。不管用户的移动设备多长，设计师都希望用户伸出手指就可以碰到，所以这个场景下，这个提示就是以下边为基准的。所以在适配的时候就要全部以下面为基准定位坐标。
+
 ![](https://raw.githubusercontent.com/GloriousFt/my_blog/gh-pages/assets/img/stage1.png)
 
 再比如下图的蓝天和草地的场景，设计师希望天地交界线就在屏幕的中间，那么就需要全部元素都垂直居中，这样不管设备屏幕大小，动画的元素都是基于这条"交界线"的。
+
 ![](https://raw.githubusercontent.com/GloriousFt/my_blog/gh-pages/assets/img/stage2.png)
 
 其实最常见的还是以顶边为基准的场景，比如关闭、后退这些按钮，通常都是要放到屏幕顶部的，如下图所示。
+
 ![](https://raw.githubusercontent.com/GloriousFt/my_blog/gh-pages/assets/img/stage3.png)
 
 ### canvas适配
@@ -165,9 +172,11 @@ _move(sprite, position, duration, easing, callback) {
 所以，为了给用户带来更好的体验，我把所有资源按场景进行了分割，只在用户需要的场景提前加载资源。
 
 例如在页面初始化的时候，其实页面是只加载了蓝天白云这几个图片资源的，文字效果淡出，等待用户长按按钮的时候，第一个场景的资源才开始加载。
+
 ![](https://raw.githubusercontent.com/GloriousFt/my_blog/gh-pages/assets/img/test1.png)
 
 当正式进入第一个场景时，页面会加载下一个场景的资源，这样以此类推，直到最后一个场景。
+
 ![](https://raw.githubusercontent.com/GloriousFt/my_blog/gh-pages/assets/img/test2.png)
 
 在资源处理上其实还可以做一些工程上的优化，比如小的图片转化为base64的，大的图片剪切成两个或多个图片拼接显示，这个主要是因为过大的图片可能会在加载时一点点显示，体验不好，而且还有可能canvas绘制不出来，用pixijs时，在绘制大的长图时会黑屏。
