@@ -8,8 +8,8 @@ status: publish
 categories:
 - Technology
 tags:
-- microtask
-- eventloop
+- pixijs
+- tweenjs
 meta:
   _edit_last: '1'
 ---
